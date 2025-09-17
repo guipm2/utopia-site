@@ -1,80 +1,80 @@
 # Utopia
 
-A modern, animated landing experience built with Next.js 14, Tailwind CSS, and a rich set of UI/3D components. It showcases interactive sections, smooth transitions, and 3D backgrounds using React Three Fiber.
+Uma landing page moderna e animada construída com Next.js 14, Tailwind CSS e um conjunto robusto de componentes de UI e 3D. O projeto demonstra seções interativas, transições suaves e fundos em 3D usando React Three Fiber.
 
-## Tech Stack
+## Stack de Tecnologias
 
 - Next.js 14 (App Router)
 - TypeScript
 - Tailwind CSS + tailwindcss-animate
-- Radix UI primitives
-- Custom UI components (in `components/ui`)
-- Framer Motion (animations)
-- React Three Fiber + Drei + Three.js (3D scenes)
-- next-themes (theme switch / dark mode)
-- React Hook Form + Zod (forms + validation)
-- Recharts, Embla Carousel, Sonner, and more
+- Radix UI (primitives)
+- Componentes de UI personalizados (em `components/ui`)
+- Framer Motion (animações)
+- React Three Fiber + Drei + Three.js (cenas 3D)
+- next-themes (tema/escuro)
+- React Hook Form + Zod (forms e validação)
+- Recharts, Embla Carousel, Sonner e outros
 
-## Project Structure
+## Estrutura do Projeto
 
-- `app/` — App Router pages, global styles import, and layout
-- `components/ui/` — Reusable UI components (buttons, dialogs, forms, etc.)
-- `components/three/` — 3D scenes and helpers (React Three Fiber + Drei)
-- `components/` — Theme provider and other shared components
-- `hooks/` — Custom hooks
-- `lib/` — Utilities
-- `public/` — Static assets
-- `styles/` — Tailwind CSS globals
+- `app/` — Páginas com App Router, import de estilos globais e layout
+- `components/ui/` — Componentes reutilizáveis (botões, diálogos, formulários etc.)
+- `components/three/` — Cenas e utilitários 3D (React Three Fiber + Drei)
+- `components/` — Provider de tema e componentes compartilhados
+- `hooks/` — Hooks customizados
+- `lib/` — Utilitários
+- `public/` — Assets estáticos
+- `styles/` — CSS global do Tailwind
 
-## Requirements
+## Requisitos
 
-- Node.js 18.18+ (or 20+ recommended)
-- pnpm (project uses `pnpm-lock.yaml`)
+- Node.js 18.18+ (ou 20+ recomendado)
+- pnpm (o projeto usa `pnpm-lock.yaml`)
 
-## Getting Started
+## Como começar
 
-1) Install dependencies
+1) Instalar dependências
 
-```
+```bash
 pnpm install
 ```
 
-2) Run the development server
+2) Rodar o servidor de desenvolvimento
 
-```
+```bash
 pnpm dev
 ```
 
-Then open http://localhost:3000 in your browser.
+Depois, acesse http://localhost:3000 no navegador.
 
-3) Build for production
+3) Gerar build de produção
 
-```
+```bash
 pnpm build
 ```
 
-4) Start the production server
+4) Iniciar o servidor em produção
 
-```
+```bash
 pnpm start
 ```
 
-## Available Scripts
+## Scripts disponíveis
 
-- `pnpm dev` — Start the Next.js dev server
-- `pnpm build` — Build the production bundle
-- `pnpm start` — Start Next.js in production mode
-- `pnpm lint` — Run Next.js lint
+- `pnpm dev` — Inicia o servidor de desenvolvimento do Next.js
+- `pnpm build` — Gera o bundle de produção
+- `pnpm start` — Inicia o Next.js em modo de produção
+- `pnpm lint` — Executa o lint do Next.js
 
-## Environment variables
+## Variáveis de ambiente
 
-No required env vars by default. If you add any client-side config, place them in `.env.local` with the `NEXT_PUBLIC_` prefix and restart the dev server.
+Não há variáveis obrigatórias por padrão. Caso adicione alguma configuração no cliente, use `.env.local` com prefixo `NEXT_PUBLIC_` e reinicie o servidor de desenvolvimento.
 
-## Notes
+## Notas
 
-- 3D experiences live under `components/three/` (e.g. background/hero scenes)
-- UI building blocks are based on Radix UI primitives and Tailwind styling
+- As experiências 3D ficam em `components/three/` (ex.: cenas de background/hero)
+- Os blocos de UI usam Radix UI como base, estilizados com Tailwind
 
-## License
+## Licença
 
-All rights reserved. If you plan to open-source or publish, update this section accordingly (e.g., MIT).
+Todos os direitos reservados. Se desejar abrir o código ou publicar como open source, atualize esta seção (ex.: MIT).
