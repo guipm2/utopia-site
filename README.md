@@ -1,5 +1,7 @@
 # Utopia
 
+![CI](https://github.com/guipm2/utopia-site/actions/workflows/ci.yml/badge.svg)
+
 Uma landing page moderna e animada construída com Next.js 14, Tailwind CSS e um conjunto robusto de componentes de UI e 3D. O projeto demonstra seções interativas, transições suaves e fundos em 3D usando React Three Fiber.
 
 ## Stack de Tecnologias
@@ -77,4 +79,20 @@ Não há variáveis obrigatórias por padrão. Caso adicione alguma configuraç�
 
 ## Licença
 
-Todos os direitos reservados. Se desejar abrir o código ou publicar como open source, atualize esta seção (ex.: MIT).
+Distribuído sob a licença [MIT](./LICENSE).
+
+---
+
+## Pré-visualização
+
+Você pode fazer o deploy com um clique na Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/guipm2/utopia-site)
+
+### Deploy manual (Vercel)
+
+1) Crie uma conta na Vercel e instale o Vercel CLI (opcional)
+2) Conecte seu repositório `guipm2/utopia-site`
+3) Configure o framework como Next.js e a versão do Node 20
+4) Use `pnpm install`, `pnpm build` e `pnpm start` (defaults da Vercel para Next já funcionam)
+5) Se precisar, adicione variáveis de ambiente em Project Settings > Environment Variables
