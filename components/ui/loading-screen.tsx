@@ -9,25 +9,32 @@ export function LoadingScreen() {
   const [showExit, setShowExit] = useState(false)
 
   useEffect(() => {
+    // Detect if low-end device
+    const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4
+    
     const timer = setInterval(() => {
       setProgress((prev) => {
         let increment = 0
-        // Faster loading - reduced delays
-        if (prev < 40) increment = Math.random() * 15 + 8
-        else if (prev < 80) increment = Math.random() * 10 + 5
-        else if (prev < 100) increment = Math.random() * 8 + 3
+        // Even faster loading on low-end devices
+        if (isLowEnd) {
+          increment = Math.random() * 25 + 15
+        } else {
+          if (prev < 40) increment = Math.random() * 15 + 8
+          else if (prev < 80) increment = Math.random() * 10 + 5
+          else if (prev < 100) increment = Math.random() * 8 + 3
+        }
 
         const next = Math.min(prev + increment, 100)
 
         if (next === 100) {
           setShowExit(true)
-          setTimeout(() => setIsComplete(true), 500)
+          setTimeout(() => setIsComplete(true), isLowEnd ? 300 : 500)
           clearInterval(timer)
         }
 
         return next
       })
-    }, 80) // Faster interval
+    }, isLowEnd ? 60 : 80) // Faster interval on low-end
 
     return () => clearInterval(timer)
   }, [])

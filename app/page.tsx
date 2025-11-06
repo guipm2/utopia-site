@@ -1,22 +1,70 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import { motion, useScroll, useSpring } from "framer-motion"
 import { ChevronRight, Menu, X, Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
-import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { usePerformance } from "@/hooks/use-performance"
+
+// Critical components - load immediately
 import { LoadingScreen } from "@/components/ui/loading-screen"
-import { CustomCursor } from "@/components/ui/custom-cursor"
-import { AnimatedBackground } from "@/components/ui/animated-background"
-import { ParallaxSection } from "@/components/ui/parallax-section"
-import { FloatingElements } from "@/components/ui/floating-elements"
-import { ProfessionalSolutions } from "@/components/ui/professional-solutions"
-import { FuturisticHero } from "@/components/ui/futuristic-hero"
-import { NeuralCases } from "@/components/ui/neural-cases"
-import { QuantumFAQ } from "@/components/ui/quantum-faq"
-import { QuantumCTA } from "@/components/ui/quantum-cta"
+
+// Lazy load heavy components with priority
+const CustomCursor = dynamic(
+  () => import("@/components/ui/custom-cursor").then(mod => ({ default: mod.CustomCursor })),
+  { ssr: false }
+)
+
+const AnimatedBackground = dynamic(
+  () => import("@/components/ui/animated-background").then(mod => ({ default: mod.AnimatedBackground })),
+  { ssr: false }
+)
+
+const FloatingElements = dynamic(
+  () => import("@/components/ui/floating-elements").then(mod => ({ default: mod.FloatingElements })),
+  { ssr: false }
+)
+
+const FuturisticHero = dynamic(
+  () => import("@/components/ui/futuristic-hero").then(mod => ({ default: mod.FuturisticHero })),
+  { 
+    ssr: false,
+    loading: () => <div className="w-full h-screen bg-black" />
+  }
+)
+
+const ScrollReveal = dynamic(
+  () => import("@/components/ui/scroll-reveal").then(mod => ({ default: mod.ScrollReveal })),
+  { ssr: false }
+)
+
+const ParallaxSection = dynamic(
+  () => import("@/components/ui/parallax-section").then(mod => ({ default: mod.ParallaxSection })),
+  { ssr: false }
+)
+
+const ProfessionalSolutions = dynamic(
+  () => import("@/components/ui/professional-solutions").then(mod => ({ default: mod.ProfessionalSolutions })),
+  { ssr: false }
+)
+
+const NeuralCases = dynamic(
+  () => import("@/components/ui/neural-cases").then(mod => ({ default: mod.NeuralCases })),
+  { ssr: false }
+)
+
+const QuantumFAQ = dynamic(
+  () => import("@/components/ui/quantum-faq").then(mod => ({ default: mod.QuantumFAQ })),
+  { ssr: false }
+)
+
+const QuantumCTA = dynamic(
+  () => import("@/components/ui/quantum-cta").then(mod => ({ default: mod.QuantumCTA })),
+  { ssr: false }
+)
 
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -24,6 +72,7 @@ export default function LandingPage() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const { scrollYProgress } = useScroll()
+  const performance = usePerformance()
 
   // Smooth spring animation for scroll-based effects
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
@@ -45,9 +94,11 @@ export default function LandingPage() {
   return (
     <>
       <LoadingScreen />
-      <CustomCursor />
-      <AnimatedBackground />
-      <FloatingElements />
+      
+      {/* Only render expensive visual effects on capable devices */}
+      {!performance.isLowEnd && !performance.prefersReducedMotion && <CustomCursor />}
+      {!performance.isLowEnd && <AnimatedBackground />}
+      {!performance.isLowEnd && !performance.prefersReducedMotion && <FloatingElements />}
 
       <div className="flex min-h-[100dvh] flex-col bg-black text-white relative">
         <motion.header

@@ -4,11 +4,13 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef, useState, useEffect, useMemo } from "react"
 import { ArrowRight, Sparkles, Zap, Brain, Infinity } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { usePerformance } from "@/hooks/use-performance"
 
 export function FuturisticHero() {
   const [currentPhrase, setCurrentPhrase] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
+  const performance = usePerformance()
 
   const phrases = ["somos a Utopia.", "pensamos.", "criamos.", "aplicamos."]
 
@@ -16,9 +18,23 @@ export function FuturisticHero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1])
 
+  // Adjust complexity based on device performance
+  const complexityConfig = useMemo(() => {
+    if (performance.prefersReducedMotion) {
+      return { connections: 0, nodes: 0, particles: 0 }
+    }
+    if (performance.isLowEnd) {
+      return { connections: 4, nodes: 3, particles: 2 }
+    }
+    if (performance.tier === 'medium') {
+      return { connections: 8, nodes: 4, particles: 3 }
+    }
+    return { connections: 12, nodes: 6, particles: 5 }
+  }, [performance])
+
   // Memoize neural connections to prevent recalculation on every render
   const neuralConnections = useMemo(() => {
-    return Array.from({ length: 12 }).map(() => ({
+    return Array.from({ length: complexityConfig.connections }).map(() => ({
       x1: Math.random() * 100,
       y1: Math.random() * 100,
       x2: Math.random() * 100,
@@ -26,21 +42,21 @@ export function FuturisticHero() {
       duration: 3 + Math.random() * 4,
       delay: Math.random() * 5,
     }))
-  }, [])
+  }, [complexityConfig.connections])
 
   // Memoize neural nodes
   const neuralNodes = useMemo(() => {
-    return Array.from({ length: 6 }).map(() => ({
+    return Array.from({ length: complexityConfig.nodes }).map(() => ({
       left: Math.random() * 100,
       top: Math.random() * 100,
       duration: 2 + Math.random() * 3,
       delay: Math.random() * 3,
     }))
-  }, [])
+  }, [complexityConfig.nodes])
 
   // Memoize quantum particles
   const quantumParticles = useMemo(() => {
-    return Array.from({ length: 5 }).map(() => ({
+    return Array.from({ length: complexityConfig.particles }).map(() => ({
       left: 20 + Math.random() * 60,
       top: 20 + Math.random() * 60,
       xOffset: Math.random() * 100 - 50,
@@ -48,7 +64,7 @@ export function FuturisticHero() {
       duration: 8 + Math.random() * 4,
       delay: Math.random() * 5,
     }))
-  }, [])
+  }, [complexityConfig.particles])
 
   // Auto-rotate phrases
   useEffect(() => {
@@ -153,7 +169,7 @@ export function FuturisticHero() {
         />
       ))}
 
-      {/* Holographic Grid */}
+      {/* Holographic Grid - always visible but static on low-end */}
       <motion.div
         className="absolute inset-0 opacity-[0.02]"
         style={{
@@ -163,9 +179,9 @@ export function FuturisticHero() {
           `,
           backgroundSize: "60px 60px",
         }}
-        animate={{
+        animate={!performance.prefersReducedMotion && !performance.isLowEnd ? {
           backgroundPosition: ["0px 0px", "60px 60px"],
-        }}
+        } : {}}
         transition={{
           duration: 20,
           repeat: Number.POSITIVE_INFINITY,

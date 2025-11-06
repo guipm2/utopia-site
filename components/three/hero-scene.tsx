@@ -4,7 +4,9 @@ import { Canvas } from '@react-three/fiber'
 import { PerspectiveCamera } from '@react-three/drei'
 import { Suspense } from 'react'
 import { InfinitySymbol } from './infinity-symbol'
+import { SimpleInfinityBackground } from './simple-infinity-background'
 import { ErrorBoundary } from '@/components/error-boundary'
+import { usePerformance } from '@/hooks/use-performance'
 
 function Scene() {
   return (
@@ -21,9 +23,16 @@ function Scene() {
 }
 
 export function HeroScene() {
+  const performance = usePerformance()
+  
+  // Use simple 2D version on low-end devices or mobile
+  if (performance.isLowEnd || performance.isMobile) {
+    return <SimpleInfinityBackground />
+  }
+
   return (
     <div className="absolute inset-0 -z-10">
-      <ErrorBoundary>
+      <ErrorBoundary fallback={<SimpleInfinityBackground />}>
         <Canvas>
           <Suspense fallback={null}>
             <Scene />
