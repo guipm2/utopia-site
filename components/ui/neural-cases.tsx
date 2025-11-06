@@ -107,6 +107,7 @@ function FloatingTestimonial({ testimonial, index, isActive, onActivate }: Float
       style={{
         left: testimonial.position.x,
         top: testimonial.position.y,
+        transformStyle: "preserve-3d",
       }}
       initial={{ opacity: 0, scale: 0, rotateY: -180 }}
       animate={{
@@ -116,7 +117,9 @@ function FloatingTestimonial({ testimonial, index, isActive, onActivate }: Float
         y: [0, -15, 0],
       }}
       transition={{
-        initial: { duration: 1, delay: index * 0.15, type: "spring" },
+        duration: 1,
+        delay: index * 0.15,
+        type: "spring",
         y: { duration: 4 + index * 0.3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
         scale: { duration: 0.3 },
       }}
@@ -124,7 +127,6 @@ function FloatingTestimonial({ testimonial, index, isActive, onActivate }: Float
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       onClick={onActivate}
-      style={{ transformStyle: "preserve-3d" }}
     >
       {/* Quantum Glow */}
       <motion.div

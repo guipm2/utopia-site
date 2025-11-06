@@ -1,38 +1,68 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 
 export function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
+  const [isMobile, setIsMobile] = useState(true)
+  const rafRef = useRef<number>()
 
   useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  const updateMousePosition = useCallback((e: MouseEvent) => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current)
+    }
+    
+    rafRef.current = requestAnimationFrame(() => {
       setMousePosition({ x: e.clientX, y: e.clientY })
+    })
+  }, [])
+
+  useEffect(() => {
+    if (isMobile) return
+
+    // Use event delegation for better performance
+    const handleMouseEnter = (e: Event) => {
+      const target = e.target as HTMLElement
+      if (target.matches('button, a, [role="button"]')) {
+        setIsHovering(true)
+      }
     }
 
-    const handleMouseEnter = () => setIsHovering(true)
-    const handleMouseLeave = () => setIsHovering(false)
+    const handleMouseLeave = (e: Event) => {
+      const target = e.target as HTMLElement
+      if (target.matches('button, a, [role="button"]')) {
+        setIsHovering(false)
+      }
+    }
 
-    // Add hover listeners to interactive elements
-    const interactiveElements = document.querySelectorAll('button, a, [role="button"]')
-    
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', handleMouseEnter)
-      el.addEventListener('mouseleave', handleMouseLeave)
-    })
-
+    document.addEventListener('mouseover', handleMouseEnter)
+    document.addEventListener('mouseout', handleMouseLeave)
     window.addEventListener('mousemove', updateMousePosition)
 
     return () => {
+      document.removeEventListener('mouseover', handleMouseEnter)
+      document.removeEventListener('mouseout', handleMouseLeave)
       window.removeEventListener('mousemove', updateMousePosition)
-      interactiveElements.forEach(el => {
-        el.removeEventListener('mouseenter', handleMouseEnter)
-        el.removeEventListener('mouseleave', handleMouseLeave)
-      })
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current)
+      }
     }
-  }, [])
+  }, [isMobile, updateMousePosition])
+
+  if (isMobile) return null
 
   return (
     <>

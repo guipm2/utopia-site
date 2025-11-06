@@ -97,7 +97,9 @@ function FloatingCard({ solution, index, isActive, onActivate }: FloatingCardPro
         y: [0, -10, 0],
       }}
       transition={{
-        initial: { duration: 0.8, delay: index * 0.2, type: "spring" },
+        duration: 0.8,
+        delay: index * 0.2,
+        type: "spring",
         y: { duration: 3 + index * 0.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
         scale: { duration: 0.3 },
       }}

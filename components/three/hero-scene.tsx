@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { PerspectiveCamera } from '@react-three/drei'
 import { Suspense } from 'react'
 import { InfinitySymbol } from './infinity-symbol'
+import { ErrorBoundary } from '@/components/error-boundary'
 
 function Scene() {
   return (
@@ -22,11 +23,13 @@ function Scene() {
 export function HeroScene() {
   return (
     <div className="absolute inset-0 -z-10">
-      <Canvas>
-        <Suspense fallback={null}>
-          <Scene />
-        </Suspense>
-      </Canvas>
+      <ErrorBoundary>
+        <Canvas>
+          <Suspense fallback={null}>
+            <Scene />
+          </Suspense>
+        </Canvas>
+      </ErrorBoundary>
     </div>
   )
 }

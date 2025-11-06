@@ -1,35 +1,48 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export function AnimatedBackground() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [particles, setParticles] = useState<{ x: number; y: number }[]>([]);
+  const rafRef = useRef<number>();
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      // Use RAF to throttle updates
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+      
+      rafRef.current = requestAnimationFrame(() => {
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      });
     };
 
-    window.addEventListener("mousemove", updateMousePosition);
+    window.addEventListener("mousemove", updateMousePosition, { passive: true });
 
     // gera posições iniciais das partículas no client
     setParticles(
-      Array.from({ length: 20 }).map(() => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
+      Array.from({ length: 12 }).map(() => ({
+        x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1920),
+        y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 1080),
       }))
     );
 
-    return () => window.removeEventListener("mousemove", updateMousePosition);
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       {/* orbs */}
       <motion.div
-        className="absolute w-96 h-96 rounded-full"
+        className="absolute w-96 h-96 rounded-full will-change-transform"
         style={{
           background:
             "radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)",
@@ -53,7 +66,7 @@ export function AnimatedBackground() {
       />
 
       <motion.div
-        className="absolute w-80 h-80 rounded-full"
+        className="absolute w-80 h-80 rounded-full will-change-transform"
         style={{
           background:
             "radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%)",
@@ -76,7 +89,7 @@ export function AnimatedBackground() {
         initial={{ x: "70%", y: "60%" }}
       />
 
-      {/* Floating particles */}
+      {/* Floating particles - reduced from 20 to 12 */}
       {particles.map((p, i) => (
         <motion.div
           key={i}

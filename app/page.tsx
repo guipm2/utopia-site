@@ -64,12 +64,12 @@ export default function LandingPage() {
             filter: "blur(0px)",
           }}
           transition={{
-            duration: 1.4,
-            delay: 3.8,
+            duration: 0.8,
+            delay: 1.2,
             ease: [0.25, 0.1, 0.25, 1],
-            opacity: { duration: 1.2, delay: 3.8 },
-            scale: { duration: 1.2, delay: 4.0 },
-            filter: { duration: 1.0, delay: 4.2 },
+            opacity: { duration: 0.6, delay: 1.2 },
+            scale: { duration: 0.6, delay: 1.3 },
+            filter: { duration: 0.5, delay: 1.4 },
           }}
           className="fixed top-6 left-0 right-0 z-40 flex justify-center px-4"
         >
@@ -77,8 +77,8 @@ export default function LandingPage() {
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{
-              duration: 0.8,
-              delay: 4.4,
+              duration: 0.5,
+              delay: 1.5,
               ease: [0.25, 0.1, 0.25, 1],
             }}
             className={`relative backdrop-blur-3xl transition-all duration-700 rounded-full border ${
@@ -95,7 +95,7 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 4.6 }}
+              transition={{ duration: 0.6, delay: 1.6 }}
               className={`absolute inset-0 rounded-full transition-all duration-700 ${
                 isScrolled
                   ? "bg-gradient-to-r from-white/10 via-transparent to-white/10"
@@ -115,7 +115,7 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 4.8 }}
+              transition={{ duration: 0.5, delay: 1.7 }}
               className="absolute inset-[1px] rounded-full"
               style={{
                 background: `linear-gradient(145deg, 

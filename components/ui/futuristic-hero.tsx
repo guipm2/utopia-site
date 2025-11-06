@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useMemo } from "react"
 import { ArrowRight, Sparkles, Zap, Brain, Infinity } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -16,13 +16,47 @@ export function FuturisticHero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1])
 
+  // Memoize neural connections to prevent recalculation on every render
+  const neuralConnections = useMemo(() => {
+    return Array.from({ length: 12 }).map(() => ({
+      x1: Math.random() * 100,
+      y1: Math.random() * 100,
+      x2: Math.random() * 100,
+      y2: Math.random() * 100,
+      duration: 3 + Math.random() * 4,
+      delay: Math.random() * 5,
+    }))
+  }, [])
+
+  // Memoize neural nodes
+  const neuralNodes = useMemo(() => {
+    return Array.from({ length: 6 }).map(() => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      duration: 2 + Math.random() * 3,
+      delay: Math.random() * 3,
+    }))
+  }, [])
+
+  // Memoize quantum particles
+  const quantumParticles = useMemo(() => {
+    return Array.from({ length: 5 }).map(() => ({
+      left: 20 + Math.random() * 60,
+      top: 20 + Math.random() * 60,
+      xOffset: Math.random() * 100 - 50,
+      yOffset: Math.random() * 100 - 50,
+      duration: 8 + Math.random() * 4,
+      delay: Math.random() * 5,
+    }))
+  }, [])
+
   // Auto-rotate phrases
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPhrase((prev) => (prev + 1) % phrases.length)
     }, 4000)
     return () => clearInterval(interval)
-  }, [])
+  }, [phrases.length])
 
   return (
     <section ref={containerRef} className="w-full h-screen overflow-hidden relative bg-black">
@@ -30,54 +64,47 @@ export function FuturisticHero() {
       <div className="absolute inset-0 -z-20">
         {/* Neural connections */}
         <svg className="absolute inset-0 w-full h-full opacity-10">
-          {Array.from({ length: 15 }).map((_, i) => {
-            const x1 = Math.random() * 100
-            const y1 = Math.random() * 100
-            const x2 = Math.random() * 100
-            const y2 = Math.random() * 100
-
-            return (
-              <motion.line
-                key={i}
-                x1={`${x1}%`}
-                y1={`${y1}%`}
-                x2={`${x2}%`}
-                y2={`${y2}%`}
-                stroke="rgba(255,255,255,0.1)"
-                strokeWidth="0.5"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{
-                  pathLength: [0, 1, 0],
-                  opacity: [0, 0.3, 0],
-                }}
-                transition={{
-                  duration: 3 + Math.random() * 4,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: Math.random() * 5,
-                  ease: "easeInOut",
-                }}
-              />
-            )
-          })}
+          {neuralConnections.map((conn, i) => (
+            <motion.line
+              key={i}
+              x1={`${conn.x1}%`}
+              y1={`${conn.y1}%`}
+              x2={`${conn.x2}%`}
+              y2={`${conn.y2}%`}
+              stroke="rgba(255,255,255,0.1)"
+              strokeWidth="0.5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{
+                pathLength: [0, 1, 0],
+                opacity: [0, 0.3, 0],
+              }}
+              transition={{
+                duration: conn.duration,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: conn.delay,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
         </svg>
 
         {/* Neural nodes */}
-        {Array.from({ length: 8 }).map((_, i) => (
+        {neuralNodes.map((node, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white/20 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${node.left}%`,
+              top: `${node.top}%`,
             }}
             animate={{
               scale: [1, 1.5, 1],
               opacity: [0.2, 0.8, 0.2],
             }}
             transition={{
-              duration: 2 + Math.random() * 3,
+              duration: node.duration,
               repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 3,
+              delay: node.delay,
             }}
           />
         ))}
@@ -103,25 +130,25 @@ export function FuturisticHero() {
       />
 
       {/* Floating Quantum Particles */}
-      {Array.from({ length: 6 }).map((_, i) => (
+      {quantumParticles.map((particle, i) => (
         <motion.div
           key={i}
           className="absolute w-2 h-2 bg-white/10 rounded-full blur-sm"
           style={{
-            left: `${20 + Math.random() * 60}%`,
-            top: `${20 + Math.random() * 60}%`,
+            left: `${particle.left}%`,
+            top: `${particle.top}%`,
           }}
           animate={{
-            x: [0, Math.random() * 100 - 50, 0],
-            y: [0, Math.random() * 100 - 50, 0],
+            x: [0, particle.xOffset, 0],
+            y: [0, particle.yOffset, 0],
             scale: [1, 1.5, 1],
             opacity: [0.1, 0.6, 0.1],
           }}
           transition={{
-            duration: 8 + Math.random() * 4,
+            duration: particle.duration,
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
-            delay: Math.random() * 5,
+            delay: particle.delay,
           }}
         />
       ))}

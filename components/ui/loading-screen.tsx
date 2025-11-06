@@ -12,21 +12,22 @@ export function LoadingScreen() {
     const timer = setInterval(() => {
       setProgress((prev) => {
         let increment = 0
-        if (prev < 30) increment = Math.random() * 8 + 2
-        else if (prev < 70) increment = Math.random() * 4 + 1
-        else if (prev < 100) increment = Math.random() * 3 + 0.5
+        // Faster loading - reduced delays
+        if (prev < 40) increment = Math.random() * 15 + 8
+        else if (prev < 80) increment = Math.random() * 10 + 5
+        else if (prev < 100) increment = Math.random() * 8 + 3
 
         const next = Math.min(prev + increment, 100)
 
         if (next === 100) {
           setShowExit(true)
-          setTimeout(() => setIsComplete(true), 800)
+          setTimeout(() => setIsComplete(true), 500)
           clearInterval(timer)
         }
 
         return next
       })
-    }, 100)
+    }, 80) // Faster interval
 
     return () => clearInterval(timer)
   }, [])
@@ -135,9 +136,9 @@ export function LoadingScreen() {
             </AnimatePresence>
           </div>
 
-          {/* Background particles */}
-          <div className="absolute inset-0 overflow-hidden">
-            {[...Array(20)].map((_, i) => (
+          {/* Background particles - reduced from 20 to 10 */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(10)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1 h-1 bg-white/20 rounded-full"
