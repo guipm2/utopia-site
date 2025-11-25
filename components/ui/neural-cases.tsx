@@ -1,8 +1,9 @@
 "use client"
 
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useMemo } from "react"
 import { Star, Brain, Zap, TrendingUp, Shield, Sparkles } from "lucide-react"
+import { usePerformance } from "@/hooks/use-performance"
 
 const testimonials = [
   {
@@ -14,8 +15,8 @@ const testimonials = [
     company: "TechFlow Dynamics",
     rating: 5,
     metrics: { efficiency: "+380%", satisfaction: "4.9/5", evolution: "Contínua" },
-    color: "from-blue-500/20 to-cyan-500/20",
-    glowColor: "rgba(59, 130, 246, 0.3)",
+    color: "from-neon-green/20 to-neon-green/30",
+    glowColor: "rgba(0, 255, 65, 0.4)",
     icon: <Brain className="size-5" />,
     position: { x: "10%", y: "15%" },
   },
@@ -28,8 +29,8 @@ const testimonials = [
     company: "SalesMax Quantum",
     rating: 5,
     metrics: { growth: "+450%", accuracy: "96.7%", insights: "∞" },
-    color: "from-emerald-500/20 to-teal-500/20",
-    glowColor: "rgba(16, 185, 129, 0.3)",
+    color: "from-neon-green/25 to-neon-green-light/20",
+    glowColor: "rgba(0, 255, 65, 0.35)",
     icon: <TrendingUp className="size-5" />,
     position: { x: "75%", y: "20%" },
   },
@@ -42,8 +43,8 @@ const testimonials = [
     company: "InnovaCorp Future",
     rating: 5,
     metrics: { productivity: "+340%", innovation: "Exponencial", impact: "Transformador" },
-    color: "from-purple-500/20 to-violet-500/20",
-    glowColor: "rgba(147, 51, 234, 0.3)",
+    color: "from-neon-green/30 to-neon-green-dark/25",
+    glowColor: "rgba(0, 255, 65, 0.5)",
     icon: <Sparkles className="size-5" />,
     position: { x: "20%", y: "70%" },
   },
@@ -56,8 +57,8 @@ const testimonials = [
     company: "DataDriven Neural",
     rating: 5,
     metrics: { integration: "100%", performance: "Quântica", scalability: "Ilimitada" },
-    color: "from-orange-500/20 to-red-500/20",
-    glowColor: "rgba(249, 115, 22, 0.3)",
+    color: "from-neon-green-light/20 to-neon-green/25",
+    glowColor: "rgba(0, 255, 65, 0.45)",
     icon: <Zap className="size-5" />,
     position: { x: "70%", y: "65%" },
   },
@@ -70,8 +71,8 @@ const testimonials = [
     company: "GrowthLab Infinity",
     rating: 5,
     metrics: { roi: "+400%", transformation: "Quântica", timeline: "4 meses" },
-    color: "from-pink-500/20 to-rose-500/20",
-    glowColor: "rgba(236, 72, 153, 0.3)",
+    color: "from-neon-green/22 to-neon-green-light/28",
+    glowColor: "rgba(0, 255, 65, 0.38)",
     icon: <TrendingUp className="size-5" />,
     position: { x: "45%", y: "40%" },
   },
@@ -84,8 +85,8 @@ const testimonials = [
     company: "AutoFlow Quantum",
     rating: 5,
     metrics: { speed: "Instantânea", accuracy: "99.97%", intelligence: "Sobre-humana" },
-    color: "from-slate-500/20 to-gray-500/20",
-    glowColor: "rgba(100, 116, 139, 0.3)",
+    color: "from-neon-green/15 to-neon-green/25",
+    glowColor: "rgba(0, 255, 65, 0.3)",
     icon: <Shield className="size-5" />,
     position: { x: "85%", y: "45%" },
   },
@@ -100,6 +101,15 @@ interface FloatingTestimonialProps {
 
 function FloatingTestimonial({ testimonial, index, isActive, onActivate }: FloatingTestimonialProps) {
   const [isHovered, setIsHovered] = useState(false)
+  const performance = usePerformance()
+  
+  // Reduz partículas baseado na performance
+  const particleCount = useMemo(() => {
+    if (performance.prefersReducedMotion) return 0
+    if (performance.isLowEnd) return 3
+    if (performance.tier === 'medium') return 5
+    return 6
+  }, [performance])
 
   return (
     <motion.div
@@ -123,26 +133,28 @@ function FloatingTestimonial({ testimonial, index, isActive, onActivate }: Float
         y: { duration: 4 + index * 0.3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
         scale: { duration: 0.3 },
       }}
-      whileHover={{ scale: 1.15, rotateY: 10, rotateX: 5 }}
+      whileHover={{ scale: performance.isLowEnd ? 1.05 : 1.15, rotateY: performance.isLowEnd ? 0 : 10, rotateX: performance.isLowEnd ? 0 : 5 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       onClick={onActivate}
     >
-      {/* Quantum Glow */}
-      <motion.div
-        className="absolute -inset-6 rounded-3xl blur-2xl"
-        style={{ background: testimonial.glowColor }}
-        animate={{
-          opacity: isActive || isHovered ? 0.8 : 0.3,
-          scale: isActive || isHovered ? 1.3 : 1,
-          rotate: [0, 360],
-        }}
-        transition={{
-          opacity: { duration: 0.3 },
-          scale: { duration: 0.3 },
-          rotate: { duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-        }}
-      />
+      {/* Quantum Glow - desabilitado em low-end */}
+      {!performance.isLowEnd && (
+        <motion.div
+          className="absolute -inset-6 rounded-3xl blur-2xl"
+          style={{ background: testimonial.glowColor }}
+          animate={{
+            opacity: isActive || isHovered ? 0.8 : 0.3,
+            scale: isActive || isHovered ? 1.3 : 1,
+            rotate: performance.prefersReducedMotion ? 0 : [0, 360],
+          }}
+          transition={{
+            opacity: { duration: 0.3 },
+            scale: { duration: 0.3 },
+            rotate: { duration: 8, repeat: performance.prefersReducedMotion ? 0 : Number.POSITIVE_INFINITY, ease: "linear" },
+          }}
+        />
+      )}
 
       {/* Neural Card */}
       <motion.div
@@ -153,45 +165,49 @@ function FloatingTestimonial({ testimonial, index, isActive, onActivate }: Float
           background: `linear-gradient(135deg, ${testimonial.color.split(" ")[1]}, ${testimonial.color.split(" ")[3]})`,
         }}
       >
-        {/* Quantum Shimmer */}
-        <motion.div
-          className="absolute inset-0 -translate-x-full"
-          style={{
-            background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
-          }}
-          animate={isHovered || isActive ? { x: "200%" } : { x: "-100%" }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-        />
+        {/* Quantum Shimmer - desabilitado em low-end */}
+        {!performance.isLowEnd && !performance.prefersReducedMotion && (
+          <motion.div
+            className="absolute inset-0 -translate-x-full"
+            style={{
+              background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
+            }}
+            animate={isHovered || isActive ? { x: "200%" } : { x: "-100%" }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+          />
+        )}
 
         {/* Neural Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <svg className="w-full h-full">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <motion.circle
-                key={i}
-                cx={`${Math.random() * 100}%`}
-                cy={`${Math.random() * 100}%`}
-                r="1"
-                fill="white"
-                animate={{
-                  opacity: [0.1, 0.5, 0.1],
-                  r: [1, 2, 1],
-                }}
-                transition={{
-                  duration: 2 + Math.random() * 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: Math.random() * 2,
-                }}
-              />
-            ))}
-          </svg>
-        </div>
+        {particleCount > 0 && (
+          <div className="absolute inset-0 opacity-10">
+            <svg className="w-full h-full">
+              {Array.from({ length: particleCount }).map((_, i) => (
+                <motion.circle
+                  key={i}
+                  cx={`${Math.random() * 100}%`}
+                  cy={`${Math.random() * 100}%`}
+                  r="1"
+                  fill="white"
+                  animate={{
+                    opacity: [0.1, 0.5, 0.1],
+                    r: [1, 2, 1],
+                  }}
+                  transition={{
+                    duration: 2 + Math.random() * 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    delay: Math.random() * 2,
+                  }}
+                />
+              ))}
+            </svg>
+          </div>
+        )}
 
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <motion.div
             className="p-3 rounded-xl bg-white/10 backdrop-blur-sm"
-            animate={{ rotate: isHovered ? 360 : 0 }}
+            animate={{ rotate: isHovered && !performance.prefersReducedMotion ? 360 : 0 }}
             transition={{ duration: 0.6 }}
           >
             <div className="text-white">{testimonial.icon}</div>
@@ -270,14 +286,23 @@ export function NeuralCases() {
   const [activeTestimonial, setActiveTestimonial] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-20%" })
+  const performance = usePerformance()
+  
+  // Ajusta complexidade baseado na performance
+  const complexity = useMemo(() => {
+    if (performance.prefersReducedMotion) return { lines: 0, particles: 0 }
+    if (performance.isLowEnd) return { lines: 8, particles: 3 }
+    if (performance.tier === 'medium') return { lines: 15, particles: 4 }
+    return { lines: 25, particles: 6 }
+  }, [performance])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   })
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"])
-  const backgroundScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.15, 1.3])
+  const backgroundY = useTransform(scrollYProgress, [0, 1], performance.isLowEnd ? ["0%", "0%"] : ["0%", "40%"])
+  const backgroundScale = useTransform(scrollYProgress, [0, 0.5, 1], performance.isLowEnd ? [1, 1, 1] : [1, 1.15, 1.3])
 
   // Auto-rotate testimonials
   useEffect(() => {
@@ -293,63 +318,67 @@ export function NeuralCases() {
     <section ref={containerRef} className="relative w-full py-32 overflow-hidden">
       {/* Quantum Field Background */}
       <motion.div className="absolute inset-0 opacity-40" style={{ y: backgroundY, scale: backgroundScale }}>
-        {/* Neural Network */}
-        <div className="absolute inset-0">
-          <svg className="w-full h-full opacity-20">
-            {Array.from({ length: 25 }).map((_, i) => {
-              const x1 = Math.random() * 100
-              const y1 = Math.random() * 100
-              const x2 = Math.random() * 100
-              const y2 = Math.random() * 100
+        {/* Neural Network - reduzido baseado em performance */}
+        {complexity.lines > 0 && (
+          <div className="absolute inset-0">
+            <svg className="w-full h-full opacity-20">
+              {Array.from({ length: complexity.lines }).map((_, i) => {
+                const x1 = Math.random() * 100
+                const y1 = Math.random() * 100
+                const x2 = Math.random() * 100
+                const y2 = Math.random() * 100
 
-              return (
-                <motion.line
-                  key={i}
-                  x1={`${x1}%`}
-                  y1={`${y1}%`}
-                  x2={`${x2}%`}
-                  y2={`${y2}%`}
-                  stroke="rgba(255,255,255,0.1)"
-                  strokeWidth="0.5"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{
-                    pathLength: [0, 1, 0],
-                    opacity: [0, 0.3, 0],
-                  }}
-                  transition={{
-                    duration: 4 + Math.random() * 6,
-                    repeat: Number.POSITIVE_INFINITY,
-                    delay: Math.random() * 8,
-                    ease: "easeInOut",
-                  }}
-                />
-              )
-            })}
-          </svg>
-        </div>
+                return (
+                  <motion.line
+                    key={i}
+                    x1={`${x1}%`}
+                    y1={`${y1}%`}
+                    x2={`${x2}%`}
+                    y2={`${y2}%`}
+                    stroke="rgba(255,255,255,0.1)"
+                    strokeWidth="0.5"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{
+                      pathLength: [0, 1, 0],
+                      opacity: [0, 0.3, 0],
+                    }}
+                    transition={{
+                      duration: 4 + Math.random() * 6,
+                      repeat: Number.POSITIVE_INFINITY,
+                      delay: Math.random() * 8,
+                      ease: "easeInOut",
+                    }}
+                  />
+                )
+              })}
+            </svg>
+          </div>
+        )}
 
-        {/* Simplified Reactive Quantum Field */}
-        <motion.div
-          className="absolute w-[600px] h-[600px] rounded-full blur-3xl"
-          style={{
-            background: `radial-gradient(circle, ${currentTestimonial.glowColor} 0%, transparent 70%)`,
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-          animate={{
-            opacity: [0.2, 0.4, 0.2],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
+        {/* Simplified Reactive Quantum Field - apenas em dispositivos capazes */}
+        {!performance.isLowEnd && (
+          <motion.div
+            className="absolute w-[600px] h-[600px] rounded-full blur-3xl"
+            style={{
+              background: `radial-gradient(circle, ${currentTestimonial.glowColor} 0%, transparent 70%)`,
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+            animate={performance.prefersReducedMotion ? {} : {
+              opacity: [0.2, 0.4, 0.2],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+        )}
 
-        {/* Quantum Particles */}
-        {testimonials.map((testimonial, i) => (
+        {/* Quantum Particles - reduzido baseado em performance */}
+        {complexity.particles > 0 && testimonials.slice(0, complexity.particles).map((testimonial, i) => (
           <motion.div
             key={testimonial.id}
             className="absolute w-40 h-40 rounded-full blur-3xl"
@@ -361,36 +390,38 @@ export function NeuralCases() {
             animate={{
               opacity: activeTestimonial === i ? [0.3, 0.6, 0.3] : [0.1, 0.2, 0.1],
               scale: activeTestimonial === i ? [1, 1.4, 1] : [1, 1.2, 1],
-              rotate: [0, 360],
+              rotate: performance.prefersReducedMotion ? 0 : [0, 360],
             }}
             transition={{
               opacity: { duration: 3, repeat: Number.POSITIVE_INFINITY },
               scale: { duration: 3, repeat: Number.POSITIVE_INFINITY },
-              rotate: { duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
+              rotate: { duration: 10, repeat: performance.prefersReducedMotion ? 0 : Number.POSITIVE_INFINITY, ease: "linear" },
             }}
           />
         ))}
       </motion.div>
 
-      {/* Holographic Grid */}
-      <motion.div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-        animate={{
-          backgroundPosition: ["0px 0px", "80px 80px"],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "linear",
-        }}
-      />
+      {/* Holographic Grid - desabilitado em low-end */}
+      {!performance.isLowEnd && (
+        <motion.div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 80px",
+          }}
+          animate={performance.prefersReducedMotion ? {} : {
+            backgroundPosition: ["0px 0px", "80px 80px"],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
+        />
+      )}
 
       <div className="container px-4 md:px-6 relative z-10">
         {/* Quantum Header */}

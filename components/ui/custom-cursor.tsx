@@ -68,7 +68,7 @@ export function CustomCursor() {
     <>
       {/* Main cursor */}
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-white rounded-full pointer-events-none z-50 mix-blend-difference"
+        className="fixed top-0 left-0 w-4 h-4 bg-neon-green rounded-full pointer-events-none z-50 shadow-[0_0_10px_rgba(0,255,65,0.8)]"
         animate={{
           x: mousePosition.x - 8,
           y: mousePosition.y - 8,
@@ -83,7 +83,7 @@ export function CustomCursor() {
       
       {/* Cursor trail */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-white/30 rounded-full pointer-events-none z-40"
+        className="fixed top-0 left-0 w-8 h-8 border border-neon-green/50 rounded-full pointer-events-none z-40 shadow-[0_0_15px_rgba(0,255,65,0.4)]"
         animate={{
           x: mousePosition.x - 16,
           y: mousePosition.y - 16,

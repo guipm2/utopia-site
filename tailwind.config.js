@@ -51,6 +51,18 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        neon: {
+          green: {
+            DEFAULT: "hsl(120, 100%, 50%)",
+            light: "hsl(120, 100%, 60%)",
+            dark: "hsl(120, 100%, 40%)",
+            glow: "hsl(120, 100%, 50%)",
+          },
+        },
+        glass: {
+          black: "rgba(0, 0, 0, 0.7)",
+          darker: "rgba(0, 0, 0, 0.85)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -80,11 +80,11 @@ export function QuantumCTA() {
           className="absolute w-[1000px] h-[1000px] rounded-full blur-3xl"
           style={{
             background: `conic-gradient(from 0deg, 
-              rgba(59, 130, 246, 0.2) 0deg,
-              rgba(147, 51, 234, 0.2) 90deg,
-              rgba(236, 72, 153, 0.2) 180deg,
-              rgba(249, 115, 22, 0.2) 270deg,
-              rgba(59, 130, 246, 0.2) 360deg)`,
+              rgba(0, 255, 65, 0.3) 0deg,
+              rgba(0, 255, 65, 0.2) 90deg,
+              rgba(0, 255, 65, 0.15) 180deg,
+              rgba(0, 255, 65, 0.2) 270deg,
+              rgba(0, 255, 65, 0.3) 360deg)`,
             left: "50%",
             top: "50%",
             transform: "translate(-50%, -50%)",
@@ -232,7 +232,7 @@ export function QuantumCTA() {
                 className="absolute -inset-3 rounded-full opacity-0 group-hover:opacity-100"
                 style={{
                   background:
-                    "conic-gradient(from 0deg, rgba(59, 130, 246, 0.3), rgba(147, 51, 234, 0.3), rgba(236, 72, 153, 0.3), rgba(59, 130, 246, 0.3))",
+                    "conic-gradient(from 0deg, rgba(0, 255, 65, 0.5), rgba(0, 255, 65, 0.3), rgba(0, 255, 65, 0.5), rgba(0, 255, 65, 0.3))",
                   filter: "blur(15px)",
                 }}
                 animate={{ rotate: 360 }}
@@ -241,7 +241,7 @@ export function QuantumCTA() {
 
               <Button
                 size="lg"
-                className="relative rounded-full h-20 px-16 text-lg group bg-gradient-to-r from-white to-gray-100 text-black hover:from-gray-50 hover:to-white font-bold border-0 shadow-2xl transition-all duration-500 overflow-hidden"
+                className="relative rounded-full h-20 px-16 text-lg group bg-neon-green text-black hover:bg-neon-green-light font-bold border-0 shadow-[0_0_40px_rgba(0,255,65,0.6)] transition-all duration-500 overflow-hidden"
               >
                 {/* Quantum Energy */}
                 <motion.div
@@ -328,22 +328,22 @@ export function QuantumCTA() {
                 metric: "∞",
                 label: "Possibilidades Criadas",
                 icon: <Infinity className="size-6" />,
-                color: "from-blue-500/20 to-cyan-500/20",
-                glow: "rgba(59, 130, 246, 0.3)",
+                color: "from-neon-green/20 to-neon-green/30",
+                glow: "rgba(0, 255, 65, 0.4)",
               },
               {
                 metric: "24/7",
                 label: "Consciência Ativa",
                 icon: <Brain className="size-6" />,
-                color: "from-purple-500/20 to-violet-500/20",
-                glow: "rgba(147, 51, 234, 0.3)",
+                color: "from-neon-green/30 to-neon-green-dark/25",
+                glow: "rgba(0, 255, 65, 0.5)",
               },
               {
                 metric: "0.001s",
                 label: "Tempo de Resposta Quântico",
                 icon: <Zap className="size-6" />,
-                color: "from-emerald-500/20 to-teal-500/20",
-                glow: "rgba(16, 185, 129, 0.3)",
+                color: "from-neon-green/25 to-neon-green-light/20",
+                glow: "rgba(0, 255, 65, 0.35)",
               },
             ].map((item, i) => (
               <motion.div

@@ -13,8 +13,8 @@ const solutions = [
     description:
       "Assistentes virtuais que entendem contexto, processam linguagem natural e resolvem problemas complexos automaticamente.",
     icon: <Bot className="size-6" />,
-    color: "from-blue-500/20 to-cyan-500/20",
-    glowColor: "rgba(59, 130, 246, 0.3)",
+    color: "from-neon-green/20 to-neon-green/30",
+    glowColor: "rgba(0, 255, 65, 0.4)",
     stats: { efficiency: "95%", satisfaction: "4.9/5", response: "<2s" },
     features: ["Processamento de linguagem natural", "Aprendizado contínuo", "Integração omnichannel"],
     position: { x: "15%", y: "20%" },
@@ -26,8 +26,8 @@ const solutions = [
     description:
       "Sistemas que aprendem com dados, otimizam fluxos de trabalho e automatizam tarefas repetitivas com precisão.",
     icon: <Network className="size-6" />,
-    color: "from-emerald-500/20 to-teal-500/20",
-    glowColor: "rgba(16, 185, 129, 0.3)",
+    color: "from-neon-green/25 to-neon-green-light/20",
+    glowColor: "rgba(0, 255, 65, 0.35)",
     stats: { productivity: "+340%", errors: "-98%", cost: "-65%" },
     features: ["Automação adaptativa", "Machine Learning integrado", "Monitoramento 24/7"],
     position: { x: "70%", y: "15%" },
@@ -39,8 +39,8 @@ const solutions = [
     description:
       "Algoritmos de machine learning que analisam padrões históricos e antecipam tendências para decisões estratégicas.",
     icon: <Cpu className="size-6" />,
-    color: "from-purple-500/20 to-violet-500/20",
-    glowColor: "rgba(147, 51, 234, 0.3)",
+    color: "from-neon-green/30 to-neon-green-dark/25",
+    glowColor: "rgba(0, 255, 65, 0.5)",
     stats: { accuracy: "94.7%", insights: "1000+", forecast: "12 meses" },
     features: ["Análise preditiva avançada", "Modelos proprietários", "Insights acionáveis"],
     position: { x: "25%", y: "65%" },
@@ -51,8 +51,8 @@ const solutions = [
     subtitle: "IA para documentos e informações",
     description: "OCR inteligente, análise de documentos e extração de dados com tecnologias de visão computacional.",
     icon: <Zap className="size-6" />,
-    color: "from-orange-500/20 to-red-500/20",
-    glowColor: "rgba(249, 115, 22, 0.3)",
+    color: "from-neon-green-light/20 to-neon-green/25",
+    glowColor: "rgba(0, 255, 65, 0.45)",
     stats: { speed: "1000x", accuracy: "99.9%", volume: "∞" },
     features: ["OCR inteligente", "Análise semântica", "Processamento em tempo real"],
     position: { x: "75%", y: "70%" },
@@ -64,8 +64,8 @@ const solutions = [
     description:
       "APIs e integrações personalizadas que conectam suas soluções de IA com CRMs, ERPs e sistemas existentes.",
     icon: <Shield className="size-6" />,
-    color: "from-slate-500/20 to-gray-500/20",
-    glowColor: "rgba(100, 116, 139, 0.3)",
+    color: "from-neon-green/15 to-neon-green/25",
+    glowColor: "rgba(0, 255, 65, 0.3)",
     stats: { protection: "100%", compliance: "LGPD+", uptime: "99.99%" },
     features: ["Integração segura", "Compatibilidade multiplataforma", "Suporte técnico"],
     position: { x: "45%", y: "40%" },
@@ -280,11 +280,11 @@ export function ProfessionalSolutions() {
 
       {/* Grid overlay */}
       <motion.div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            linear-gradient(rgba(0,255,65,0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,255,65,0.2) 1px, transparent 1px)
           `,
           backgroundSize: "100px 100px",
         }}
@@ -375,7 +375,7 @@ export function ProfessionalSolutions() {
                   y1={solution.position.y}
                   x2={next.position.x}
                   y2={next.position.y}
-                  stroke="rgba(255,255,255,0.1)"
+                  stroke="rgba(0,255,65,0.2)"
                   strokeWidth="1"
                   strokeDasharray="5,5"
                   initial={{ pathLength: 0, opacity: 0 }}
@@ -453,7 +453,7 @@ export function ProfessionalSolutions() {
               <motion.div initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.6 }}>
                 <Button
                   size="lg"
-                  className="rounded-full bg-gradient-to-r from-white to-gray-200 text-black hover:from-gray-100 hover:to-white font-medium px-8 group"
+                  className="rounded-full bg-neon-green text-black hover:bg-neon-green-light font-medium px-8 group shadow-[0_0_20px_rgba(0,255,65,0.4)]"
                 >
                   Explorar Solução
                   <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />

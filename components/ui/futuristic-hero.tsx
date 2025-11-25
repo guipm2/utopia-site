@@ -79,7 +79,7 @@ export function FuturisticHero() {
       {/* Dynamic Neural Network Background */}
       <div className="absolute inset-0 -z-20">
         {/* Neural connections */}
-        <svg className="absolute inset-0 w-full h-full opacity-10">
+        <svg className="absolute inset-0 w-full h-full opacity-20">
           {neuralConnections.map((conn, i) => (
             <motion.line
               key={i}
@@ -87,7 +87,7 @@ export function FuturisticHero() {
               y1={`${conn.y1}%`}
               x2={`${conn.x2}%`}
               y2={`${conn.y2}%`}
-              stroke="rgba(255,255,255,0.1)"
+              stroke="rgba(0,255,65,0.3)"
               strokeWidth="0.5"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{
@@ -108,7 +108,7 @@ export function FuturisticHero() {
         {neuralNodes.map((node, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
+            className="absolute w-1 h-1 bg-neon-green/40 rounded-full shadow-[0_0_10px_rgba(0,255,65,0.6)]"
             style={{
               left: `${node.left}%`,
               top: `${node.top}%`,
@@ -131,8 +131,8 @@ export function FuturisticHero() {
         className="absolute inset-0 -z-10"
         style={{
           background: `radial-gradient(circle at 50% 50%, 
-            rgba(255,255,255,0.1) 0%, 
-            rgba(255,255,255,0.05) 30%, 
+            rgba(0,255,65,0.15) 0%, 
+            rgba(0,255,65,0.08) 30%, 
             transparent 70%)`,
         }}
         animate={{
@@ -149,7 +149,7 @@ export function FuturisticHero() {
       {quantumParticles.map((particle, i) => (
         <motion.div
           key={i}
-          className="absolute w-2 h-2 bg-white/10 rounded-full blur-sm"
+          className="absolute w-2 h-2 bg-neon-green/20 rounded-full blur-sm shadow-[0_0_8px_rgba(0,255,65,0.5)]"
           style={{
             left: `${particle.left}%`,
             top: `${particle.top}%`,
@@ -171,11 +171,11 @@ export function FuturisticHero() {
 
       {/* Holographic Grid - always visible but static on low-end */}
       <motion.div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            linear-gradient(rgba(0,255,65,0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,255,65,0.2) 1px, transparent 1px)
           `,
           backgroundSize: "60px 60px",
         }}
@@ -200,9 +200,9 @@ export function FuturisticHero() {
               className="mb-12"
             >
               <motion.div
-                className="inline-flex items-center rounded-full px-8 py-4 text-sm font-medium border border-white/20 text-white backdrop-blur-xl shadow-lg relative overflow-hidden"
+                className="inline-flex items-center rounded-full px-8 py-4 text-sm font-medium border border-neon-green/30 text-neon-green backdrop-blur-xl shadow-[0_0_20px_rgba(0,255,65,0.2)] relative overflow-hidden"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
+                  background: "rgba(0,0,0,0.7)",
                   backdropFilter: "blur(20px) saturate(180%)",
                 }}
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -211,7 +211,7 @@ export function FuturisticHero() {
                 <motion.div
                   className="absolute inset-0 -translate-x-full"
                   style={{
-                    background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
+                    background: "linear-gradient(90deg, transparent, rgba(0,255,65,0.3), transparent)",
                   }}
                   animate={{ x: ["0%", "200%"] }}
                   transition={{
@@ -228,14 +228,14 @@ export function FuturisticHero() {
                     <Infinity className="size-4" />
                   </motion.div>
                   <motion.span
-                    className="size-2 bg-cyan-400 rounded-full"
+                    className="size-2 bg-neon-green rounded-full"
                     animate={{
                       scale: [1, 1.3, 1],
                       opacity: [0.7, 1, 0.7],
                       boxShadow: [
-                        "0 0 0 0 rgba(34, 211, 238, 0.4)",
-                        "0 0 0 10px rgba(34, 211, 238, 0)",
-                        "0 0 0 0 rgba(34, 211, 238, 0.4)",
+                        "0 0 0 0 rgba(0,255,65,0.4)",
+                        "0 0 0 10px rgba(0,255,65,0)",
+                        "0 0 0 0 rgba(0,255,65,0.4)",
                       ],
                     }}
                     transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
@@ -265,7 +265,7 @@ export function FuturisticHero() {
 
               {/* Holographic overlay */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-neon-green/10 to-transparent"
                 animate={{ x: ["-100%", "100%"] }}
                 transition={{
                   duration: 2,
@@ -325,7 +325,7 @@ export function FuturisticHero() {
                 className="absolute -inset-2 rounded-full opacity-0 group-hover:opacity-100"
                 style={{
                   background:
-                    "conic-gradient(from 0deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1))",
+                    "conic-gradient(from 0deg, rgba(0,255,65,0.2), rgba(0,255,65,0.5), rgba(0,255,65,0.2))",
                   filter: "blur(10px)",
                 }}
                 animate={{ rotate: 360 }}
@@ -334,11 +334,11 @@ export function FuturisticHero() {
 
               <Button
                 size="lg"
-                className="relative rounded-full h-16 px-12 text-base group bg-gradient-to-r from-white to-gray-100 text-black hover:from-gray-50 hover:to-white font-medium border-0 shadow-xl transition-all duration-300 overflow-hidden"
+                className="relative rounded-full h-16 px-12 text-base group bg-neon-green text-black hover:bg-neon-green-light font-medium border-0 shadow-[0_0_30px_rgba(0,255,65,0.5)] transition-all duration-300 overflow-hidden"
               >
                 {/* Quantum ripple */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent"
                   animate={{ x: ["-100%", "100%"] }}
                   transition={{
                     duration: 1.5,
@@ -362,14 +362,14 @@ export function FuturisticHero() {
                 className="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100"
                 style={{
                   background:
-                    "linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1))",
+                    "linear-gradient(45deg, rgba(0,255,65,0.2), rgba(0,255,65,0.4), rgba(0,255,65,0.2))",
                   filter: "blur(8px)",
                 }}
                 animate={{
                   background: [
-                    "linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1))",
-                    "linear-gradient(225deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1))",
-                    "linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1))",
+                    "linear-gradient(45deg, rgba(0,255,65,0.2), rgba(0,255,65,0.4), rgba(0,255,65,0.2))",
+                    "linear-gradient(225deg, rgba(0,255,65,0.2), rgba(0,255,65,0.4), rgba(0,255,65,0.2))",
+                    "linear-gradient(45deg, rgba(0,255,65,0.2), rgba(0,255,65,0.4), rgba(0,255,65,0.2))",
                   ],
                 }}
                 transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
@@ -378,10 +378,10 @@ export function FuturisticHero() {
               <Button
                 size="lg"
                 variant="ghost"
-                className="relative rounded-full h-16 px-12 text-base text-white hover:text-white transition-all duration-300 border border-white/30 hover:border-white/60 bg-white/5 hover:bg-white/10 backdrop-blur-sm overflow-hidden group"
+                className="relative rounded-full h-16 px-12 text-base text-neon-green hover:text-neon-green-light transition-all duration-300 border border-neon-green/40 hover:border-neon-green/70 bg-black/70 hover:bg-black/80 backdrop-blur-sm overflow-hidden group"
               >
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-neon-green/10 to-transparent"
                   animate={{ x: ["-100%", "100%"] }}
                   transition={{
                     duration: 2,
@@ -420,12 +420,12 @@ export function FuturisticHero() {
                 whileHover={{ scale: 1.05, x: 5 }}
               >
                 <motion.div
-                  className="p-2 rounded-full bg-white/5 border border-white/10"
+                  className="p-2 rounded-full bg-black/70 border border-neon-green/30 text-neon-green"
                   animate={{
                     boxShadow: [
-                      "0 0 0 0 rgba(255,255,255,0.1)",
-                      "0 0 0 8px rgba(255,255,255,0)",
-                      "0 0 0 0 rgba(255,255,255,0.1)",
+                      "0 0 0 0 rgba(0,255,65,0.2)",
+                      "0 0 0 8px rgba(0,255,65,0)",
+                      "0 0 0 0 rgba(0,255,65,0.2)",
                     ],
                   }}
                   transition={{
@@ -436,7 +436,7 @@ export function FuturisticHero() {
                 >
                   {item.icon}
                 </motion.div>
-                <span className="uppercase tracking-wider font-medium group-hover:text-white transition-colors">
+                <span className="uppercase tracking-wider font-medium group-hover:text-neon-green transition-colors">
                   {item.text}
                 </span>
               </motion.div>

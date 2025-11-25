@@ -134,8 +134,8 @@ export default function LandingPage() {
             }}
             className={`relative backdrop-blur-3xl transition-all duration-700 rounded-full border ${
               isScrolled
-                ? "bg-black/60 border-white/50 shadow-2xl shadow-black/50"
-                : "bg-black/50 border-white/40 shadow-lg shadow-black/25"
+                ? "bg-black/80 border-neon-green/60 shadow-2xl shadow-neon-green/20"
+                : "bg-black/60 border-neon-green/40 shadow-lg shadow-neon-green/10"
             }`}
             style={{
               backdropFilter: "blur(60px) saturate(200%)",
@@ -149,16 +149,16 @@ export default function LandingPage() {
               transition={{ duration: 0.6, delay: 1.6 }}
               className={`absolute inset-0 rounded-full transition-all duration-700 ${
                 isScrolled
-                  ? "bg-gradient-to-r from-white/10 via-transparent to-white/10"
-                  : "bg-gradient-to-r from-white/5 via-transparent to-white/5"
+                  ? "bg-gradient-to-r from-neon-green/10 via-transparent to-neon-green/10"
+                  : "bg-gradient-to-r from-neon-green/5 via-transparent to-neon-green/5"
               }`}
               style={{
                 background: `linear-gradient(135deg, 
-                  rgba(255,255,255,0.1) 0%, 
-                  rgba(255,255,255,0.05) 25%, 
+                  rgba(0,255,65,0.1) 0%, 
+                  rgba(0,255,65,0.05) 25%, 
                   transparent 50%, 
-                  rgba(255,255,255,0.05) 75%, 
-                  rgba(255,255,255,0.1) 100%)`,
+                  rgba(0,255,65,0.05) 75%, 
+                  rgba(0,255,65,0.1) 100%)`,
               }}
             />
 
@@ -170,9 +170,9 @@ export default function LandingPage() {
               className="absolute inset-[1px] rounded-full"
               style={{
                 background: `linear-gradient(145deg, 
-                  rgba(255,255,255,0.08) 0%, 
-                  rgba(255,255,255,0.02) 50%, 
-                  rgba(255,255,255,0.08) 100%)`,
+                  rgba(0,255,65,0.08) 0%, 
+                  rgba(0,255,65,0.02) 50%, 
+                  rgba(0,255,65,0.08) 100%)`,
               }}
             />
 
@@ -185,7 +185,7 @@ export default function LandingPage() {
                 whileHover={{ scale: 1.05 }}
               >
                 <motion.div
-                  className="size-8 rounded-full bg-gradient-to-br from-white to-gray-300 flex items-center justify-center text-black font-bold text-sm shadow-lg"
+                  className="size-8 rounded-full bg-neon-green flex items-center justify-center text-black font-bold text-sm shadow-[0_0_15px_rgba(0,255,65,0.6)]"
                   initial={{ rotate: -180, scale: 0 }}
                   animate={{ rotate: 0, scale: 1 }}
                   transition={{ duration: 0.8, delay: 5.2, type: "spring", stiffness: 200 }}
@@ -193,7 +193,7 @@ export default function LandingPage() {
                 >
                   ∞
                 </motion.div>
-                <span className="text-white drop-shadow-sm">ut∞pia</span>
+                <span className="text-neon-green drop-shadow-[0_0_10px_rgba(0,255,65,0.5)]">ut∞pia</span>
               </motion.div>
 
               <nav className="hidden md:flex gap-8">
@@ -216,10 +216,10 @@ export default function LandingPage() {
                     <motion.div whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
                       <Link
                         href={item.href}
-                        className="text-sm font-medium text-white/80 transition-all duration-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-full relative group backdrop-blur-sm"
+                        className="text-sm font-medium text-gray-300 transition-all duration-300 hover:text-neon-green hover:bg-neon-green/10 px-3 py-2 rounded-full relative group backdrop-blur-sm"
                       >
                         {item.label}
-                        <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-4 rounded-full" />
+                        <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-neon-green transition-all duration-300 group-hover:w-4 rounded-full shadow-[0_0_8px_rgba(0,255,65,0.6)]" />
                       </Link>
                     </motion.div>
                   </motion.div>
@@ -243,7 +243,7 @@ export default function LandingPage() {
                     variant="ghost"
                     size="icon"
                     onClick={toggleTheme}
-                    className="rounded-full text-white hover:bg-white/10 size-9 backdrop-blur-sm"
+                    className="rounded-full text-neon-green hover:bg-neon-green/10 hover:shadow-[0_0_15px_rgba(0,255,65,0.3)] size-9 backdrop-blur-sm"
                   >
                     {mounted && theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
                   </Button>
@@ -257,9 +257,9 @@ export default function LandingPage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 via-white/40 to-white/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500 group-hover:duration-200"></div>
-                  <Button className="relative rounded-full bg-gradient-to-r from-gray-200 to-white text-black hover:from-white hover:to-white group font-medium h-9 px-6 text-sm shadow-lg backdrop-blur-sm border border-white/20 transition-all duration-300 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-neon-green/30 via-neon-green/50 to-neon-green/30 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500 group-hover:duration-200"></div>
+                  <Button className="relative rounded-full bg-neon-green text-black hover:bg-neon-green-light group font-medium h-9 px-6 text-sm shadow-[0_0_20px_rgba(0,255,65,0.4)] backdrop-blur-sm border border-neon-green/30 transition-all duration-300 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
                     <span className="relative z-10">Explorar</span>
                     <ChevronRight className="ml-1 size-3 transition-transform group-hover:translate-x-1 relative z-10" />
                   </Button>
@@ -279,7 +279,7 @@ export default function LandingPage() {
                     variant="ghost"
                     size="icon"
                     onClick={toggleTheme}
-                    className="rounded-full text-white size-9 hover:bg-white/10"
+                    className="rounded-full text-neon-green size-9 hover:bg-neon-green/10"
                   >
                     {mounted && theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
                   </Button>
@@ -296,7 +296,7 @@ export default function LandingPage() {
                     variant="ghost"
                     size="icon"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="text-white size-9 hover:bg-white/10 rounded-full"
+                    className="text-neon-green size-9 hover:bg-neon-green/10 rounded-full"
                   >
                     {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
                   </Button>
@@ -310,9 +310,9 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                className="md:hidden absolute top-full left-0 right-0 mt-2 rounded-2xl overflow-hidden border border-white/20"
+                className="md:hidden absolute top-full left-0 right-0 mt-2 rounded-2xl overflow-hidden border border-neon-green/40 shadow-[0_0_30px_rgba(0,255,65,0.2)]"
                 style={{
-                  background: "rgba(0,0,0,0.5)",
+                  background: "rgba(0,0,0,0.8)",
                   backdropFilter: "blur(60px) saturate(200%)",
                   WebkitBackdropFilter: "blur(60px) saturate(200%)",
                 }}
@@ -322,9 +322,9 @@ export default function LandingPage() {
                   className="absolute inset-0 rounded-2xl"
                   style={{
                     background: `linear-gradient(145deg, 
-                      rgba(255,255,255,0.1) 0%, 
-                      rgba(255,255,255,0.02) 50%, 
-                      rgba(255,255,255,0.1) 100%)`,
+                      rgba(0,255,65,0.1) 0%, 
+                      rgba(0,255,65,0.02) 50%, 
+                      rgba(0,255,65,0.1) 100%)`,
                   }}
                 />
 
@@ -338,17 +338,17 @@ export default function LandingPage() {
                     <motion.div key={item.label} whileHover={{ x: 10 }} whileTap={{ scale: 0.95 }}>
                       <Link
                         href={item.href}
-                        className="px-6 py-3 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200"
+                        className="px-6 py-3 text-sm font-medium text-gray-300 hover:text-neon-green hover:bg-neon-green/10 transition-all duration-200"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {item.label}
                       </Link>
                     </motion.div>
                   ))}
-                  <div className="px-6 pt-2 border-t border-white/10 mt-2">
+                  <div className="px-6 pt-2 border-t border-neon-green/20 mt-2">
                     <div className="relative group">
-                      <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 via-white/40 to-white/20 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500 group-hover:duration-200"></div>
-                      <Button className="relative w-full rounded-full bg-gradient-to-r from-gray-200 to-white text-black hover:from-white hover:to-white mt-2 h-9 shadow-lg transition-all duration-300 overflow-hidden group">
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-neon-green/30 via-neon-green/50 to-neon-green/30 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500 group-hover:duration-200"></div>
+                      <Button className="relative w-full rounded-full bg-neon-green text-black hover:bg-neon-green-light mt-2 h-9 shadow-[0_0_20px_rgba(0,255,65,0.4)] transition-all duration-300 overflow-hidden group">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
                         <span className="relative z-10">Explorar</span>
                         <ChevronRight className="ml-1 size-3 relative z-10" />

@@ -11,8 +11,8 @@ const faqs = [
     answer:
       "A ut∞pia desenvolve soluções de inteligência artificial focadas em automação de processos empresariais. Criamos agentes conversacionais, integrações com CRM e fluxos inteligentes que ajudam empresas a ganhar eficiência no dia a dia.",
     icon: <Brain className="size-5" />,
-    color: "from-blue-500/20 to-cyan-500/20",
-    glowColor: "rgba(59, 130, 246, 0.3)",
+    color: "from-neon-green/20 to-neon-green/30",
+    glowColor: "rgba(0, 255, 65, 0.4)",
   },
   {
     id: "results",
@@ -20,8 +20,8 @@ const faqs = [
     answer:
       "Nosso diferencial é unir tecnologia de ponta em inteligência artificial com atendimento próximo e soluções sob medida, feitas para realmente gerar impacto no negócio.",
     icon: <Zap className="size-5" />,
-    color: "from-emerald-500/20 to-teal-500/20",
-    glowColor: "rgba(16, 185, 129, 0.3)",
+    color: "from-neon-green/25 to-neon-green-light/20",
+    glowColor: "rgba(0, 255, 65, 0.35)",
   },
   {
     id: "integration",
@@ -29,8 +29,8 @@ const faqs = [
     answer:
       "Sim, nossas soluções de IA se integram perfeitamente com CRMs, ERPs e sistemas que possuam possibilidade para integrações. Utilizamos APIs e protocolos de integração para garantir um sistema completo e eficiente.",
     icon: <Infinity className="size-5" />,
-    color: "from-purple-500/20 to-violet-500/20",
-    glowColor: "rgba(147, 51, 234, 0.3)",
+    color: "from-neon-green/30 to-neon-green-dark/25",
+    glowColor: "rgba(0, 255, 65, 0.5)",
   },
   {
     id: "security",
@@ -38,8 +38,8 @@ const faqs = [
     answer:
       "Utilizamos criptografia quântica e protocolos de segurança robustos para proteger seus dados. Nossas soluções estão em conformidade com as mais recentes regulamentações de segurança cibernética.",
     icon: <Shield className="size-5" />,
-    color: "from-orange-500/20 to-red-500/20",
-    glowColor: "rgba(249, 115, 22, 0.3)",
+    color: "from-neon-green-light/20 to-neon-green/25",
+    glowColor: "rgba(0, 255, 65, 0.45)",
   },
   {
     id: "support",
@@ -47,8 +47,8 @@ const faqs = [
     answer:
       "Sim, oferecemos suporte técnico 24/7. Nossa IA monitora e resolve questões em tempo real, garantindo uma operação contínua e eficiente.",
     icon: <Sparkles className="size-5" />,
-    color: "from-pink-500/20 to-rose-500/20",
-    glowColor: "rgba(236, 72, 153, 0.3)",
+    color: "from-neon-green/22 to-neon-green-light/28",
+    glowColor: "rgba(0, 255, 65, 0.38)",
   },
   {
     id: "customization",
@@ -56,8 +56,8 @@ const faqs = [
     answer:
       "Sim, cada solução de IA é personalizada para atender às necessidades específicas do seu negócio. Utilizamos aprendizado de máquina e análise de dados para criar soluções adaptáveis e eficientes.",
     icon: <Brain className="size-5" />,
-    color: "from-slate-500/20 to-gray-500/20",
-    glowColor: "rgba(100, 116, 139, 0.3)",
+    color: "from-neon-green/15 to-neon-green/25",
+    glowColor: "rgba(0, 255, 65, 0.3)",
   },
 ]
 
@@ -310,14 +310,14 @@ export function QuantumFAQ() {
               }}
             />
             <motion.span
-              className="mr-3 size-3 bg-purple-400 rounded-full"
+              className="mr-3 size-3 bg-neon-green rounded-full"
               animate={{
                 scale: [1, 1.3, 1],
                 opacity: [0.7, 1, 0.7],
                 boxShadow: [
-                  "0 0 0 0 rgba(147, 51, 234, 0.4)",
-                  "0 0 0 10px rgba(147, 51, 234, 0)",
-                  "0 0 0 0 rgba(147, 51, 234, 0.4)",
+                  "0 0 0 0 rgba(0, 255, 65, 0.4)",
+                  "0 0 0 10px rgba(0, 255, 65, 0)",
+                  "0 0 0 0 rgba(0, 255, 65, 0.4)",
                 ],
               }}
               transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}

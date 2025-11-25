@@ -65,7 +65,7 @@ export function AnimatedBackground() {
             className="absolute w-96 h-96 rounded-full will-change-transform"
             style={{
               background:
-                "radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(0,255,65,0.08) 0%, transparent 70%)",
               filter: "blur(40px)",
             }}
             animate={!performance.prefersReducedMotion ? {
@@ -89,7 +89,7 @@ export function AnimatedBackground() {
             className="absolute w-80 h-80 rounded-full will-change-transform"
             style={{
               background:
-                "radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(0,255,65,0.05) 0%, transparent 70%)",
               filter: "blur(60px)",
             }}
             animate={!performance.prefersReducedMotion ? {
@@ -115,7 +115,7 @@ export function AnimatedBackground() {
       {particles.map((p, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-white/10 rounded-full"
+          className="absolute w-1 h-1 bg-neon-green/20 rounded-full shadow-[0_0_5px_rgba(0,255,65,0.4)]"
           initial={{ x: p.x, y: p.y }}
           animate={{
             y: [p.y, p.y - 20, p.y],
@@ -132,11 +132,11 @@ export function AnimatedBackground() {
 
       {/* Grid */}
       <motion.div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            linear-gradient(rgba(0,255,65,0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,255,65,0.2) 1px, transparent 1px)
           `,
           backgroundSize: "50px 50px",
         }}
