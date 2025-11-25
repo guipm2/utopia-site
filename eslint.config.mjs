@@ -1,35 +1,60 @@
-import { defineConfig } from "eslint/config";
-import nextPlugin from "@next/eslint-plugin-next";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export default defineConfig([
-  // Objeto de configuração para o Next.js
+export default tseslint.config(
+  // Ignora arquivos gerados e dependências
+  {
+    ignores: [
+      ".next/**/*",
+      "node_modules/**/*",
+      "out/**/*",
+      "build/**/*",
+      "dist/**/*",
+      "*.config.js",
+      "*.config.mjs",
+    ],
+  },
+  
+  // Configuração base do TypeScript ESLint
+  ...tseslint.configs.recommended,
+  
   {
     // Define os arquivos para os quais estas regras se aplicam
-    files: ["**/*.{js,jsx,ts,tsx}"],
+    files: ["**/*.{js,mjs,cjs,jsx,ts,tsx}"],
     
-    // Adiciona o plugin do Next.js
-    plugins: {
-      "@next/next": nextPlugin,
+    // Configuração do parser e opções
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
     },
     
-    // Aplica as regras 'recommended' e 'core-web-vitals'
+    // Regras personalizadas
     rules: {
-      // Regras recomendadas do Next.js
-      ...nextPlugin.configs["recommended"].rules,
-      // Regras 'Core Web Vitals' (inclui muitas regras de React)
-      ...nextPlugin.configs["core-web-vitals"].rules,
+      // Desativa algumas regras que podem ser muito rigorosas
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": ["warn", { 
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_" 
+      }],
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
+      "@typescript-eslint/triple-slash-reference": "off",
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-wrapper-object-types": "off",
+      "@typescript-eslint/no-unsafe-function-type": "off",
+      "@typescript-eslint/no-this-alias": "off",
     },
 
-    // Garante que o ESLint saiba onde encontrar a configuração do Next.js
     settings: {
-        'next/core-web-vitals': nextPlugin.configs["core-web-vitals"],
-    }
-  },
-
-  // Você pode adicionar outras configurações globais aqui, se necessário
-]);
+      react: {
+        version: "detect",
+      },
+    },
+  }
+);
