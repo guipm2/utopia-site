@@ -257,7 +257,7 @@ export function FuturisticHero() {
                 animate={{ opacity: 1, x: 0, rotateY: 0 }}
                 exit={{ opacity: 0, x: -30, rotateY: 90 }}
                 transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-white drop-shadow-lg leading-tight"
+                className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-neon-green drop-shadow-[0_0_30px_rgba(0,255,65,0.5)] leading-tight"
                 style={{ perspective: "1000px" }}
               >
                 {phrases[currentPhrase]}
