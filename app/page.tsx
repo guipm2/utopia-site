@@ -318,7 +318,7 @@ export default function LandingPage() {
               </motion.div>
             )}
           </motion.div>
-        </motion.header>
+          </motion.header>
         </div>
 
         <main className="flex-1 relative">
