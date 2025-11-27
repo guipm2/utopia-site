@@ -7,6 +7,19 @@ export function LoadingScreen() {
   const [progress, setProgress] = useState(0)
   const [isComplete, setIsComplete] = useState(false)
   const [showExit, setShowExit] = useState(false)
+  const [particles, setParticles] = useState<Array<{ left: number; top: number; duration: number; delay: number }>>([])
+
+  // Gerar partículas apenas no cliente após montagem
+  useEffect(() => {
+    setParticles(
+      Array.from({ length: 10 }).map(() => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: 2 + Math.random() * 2,
+        delay: Math.random() * 2,
+      }))
+    )
+  }, [])
 
   useEffect(() => {
     // Detect if low-end device
@@ -145,22 +158,22 @@ export function LoadingScreen() {
 
           {/* Background particles - reduced from 20 to 10 */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(10)].map((_, i) => (
+            {particles.map((particle, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1 h-1 bg-white/20 rounded-full"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
+                  left: `${particle.left}%`,
+                  top: `${particle.top}%`,
                 }}
                 animate={{
                   opacity: [0, 1, 0],
                   scale: [0, 1, 0],
                 }}
                 transition={{
-                  duration: 2 + Math.random() * 2,
+                  duration: particle.duration,
                   repeat: Infinity,
-                  delay: Math.random() * 2,
+                  delay: particle.delay,
                 }}
               />
             ))}

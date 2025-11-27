@@ -66,6 +66,16 @@ export function FuturisticHero() {
     }))
   }, [complexityConfig.particles])
 
+  // Detectar mobile para otimizar animações
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   // Auto-rotate phrases
   useEffect(() => {
     const interval = setInterval(() => {
@@ -200,7 +210,7 @@ export function FuturisticHero() {
               className="mb-12"
             >
               <motion.div
-                className="inline-flex items-center rounded-full px-8 py-4 text-sm font-medium border border-neon-green/30 text-neon-green backdrop-blur-xl shadow-[0_0_20px_rgba(0,255,65,0.2)] relative overflow-hidden"
+                className="inline-flex items-center rounded-full px-4 py-2 md:px-8 md:py-4 text-xs md:text-sm font-medium border border-neon-green/30 text-neon-green backdrop-blur-xl shadow-[0_0_20px_rgba(0,255,65,0.2)] relative overflow-hidden"
                 style={{
                   background: "rgba(0,0,0,0.7)",
                   backdropFilter: "blur(20px) saturate(180%)",
@@ -246,8 +256,8 @@ export function FuturisticHero() {
             </motion.div>
 
             {/* Dynamic Title */}
-            <div className="relative mb-12 flex items-center justify-center gap-4">
-              <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-white drop-shadow-lg leading-tight">
+            <div className="relative mb-8 md:mb-12 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 px-4">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-white drop-shadow-lg leading-tight">
                 Nós
               </h1>
 
@@ -257,7 +267,7 @@ export function FuturisticHero() {
                 animate={{ opacity: 1, x: 0, rotateY: 0 }}
                 exit={{ opacity: 0, x: -30, rotateY: 90 }}
                 transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-neon-green drop-shadow-[0_0_30px_rgba(0,255,65,0.5)] leading-tight"
+                className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-neon-green drop-shadow-[0_0_30px_rgba(0,255,65,0.5)] leading-tight"
                 style={{ perspective: "1000px" }}
               >
                 {phrases[currentPhrase]}
@@ -281,9 +291,9 @@ export function FuturisticHero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 8.4, ease: [0.25, 0.1, 0.25, 1] }}
-              className="mb-16"
+              className="mb-12 md:mb-16 px-4"
             >
-              <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed relative">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto leading-relaxed relative">
                 <motion.span
                   className="inline-block"
                   animate={{ opacity: [0.7, 1, 0.7] }}
@@ -311,12 +321,12 @@ export function FuturisticHero() {
         </div>
 
         {/* Quantum Action Zone */}
-        <div className="text-center max-w-5xl mx-auto pb-20">
+        <div className="text-center max-w-5xl mx-auto pb-12 md:pb-20 px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 9.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="flex flex-col sm:flex-row gap-8 justify-center mb-20"
+            className="flex flex-col sm:flex-row gap-4 md:gap-8 justify-center mb-12 md:mb-20"
           >
             {/* Primary Quantum Button */}
             <motion.div className="relative group" whileHover={{ scale: 1.05, y: -5 }} whileTap={{ scale: 0.95 }}>
@@ -334,7 +344,7 @@ export function FuturisticHero() {
 
               <Button
                 size="lg"
-                className="relative rounded-full h-16 px-12 text-base group bg-neon-green text-black hover:bg-neon-green-light font-medium border-0 shadow-[0_0_30px_rgba(0,255,65,0.5)] transition-all duration-300 overflow-hidden"
+                className="relative rounded-full h-12 md:h-16 px-8 md:px-12 text-sm md:text-base group bg-neon-green text-black hover:bg-neon-green-light font-medium border-0 shadow-[0_0_30px_rgba(0,255,65,0.5)] transition-all duration-300 overflow-hidden"
               >
                 {/* Quantum ripple */}
                 <motion.div
@@ -378,7 +388,7 @@ export function FuturisticHero() {
               <Button
                 size="lg"
                 variant="ghost"
-                className="relative rounded-full h-16 px-12 text-base text-neon-green hover:text-neon-green-light transition-all duration-300 border border-neon-green/40 hover:border-neon-green/70 bg-black/70 hover:bg-black/80 backdrop-blur-sm overflow-hidden group"
+                className="relative rounded-full h-12 md:h-16 px-8 md:px-12 text-sm md:text-base text-neon-green hover:text-neon-green-light transition-all duration-300 border border-neon-green/40 hover:border-neon-green/70 bg-black/70 hover:bg-black/80 backdrop-blur-sm overflow-hidden group"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-neon-green/10 to-transparent"
@@ -404,7 +414,7 @@ export function FuturisticHero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 10.0 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-12 text-sm text-gray-400"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-12 text-xs md:text-sm text-gray-400"
           >
             {[
               { icon: <Sparkles className="size-4" />, text: "Automatize Processos", delay: 0 },

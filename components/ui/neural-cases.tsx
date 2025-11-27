@@ -158,7 +158,7 @@ function FloatingTestimonial({ testimonial, index, isActive, onActivate }: Float
 
       {/* Neural Card */}
       <motion.div
-        className={`relative w-72 p-6 rounded-3xl border border-white/20 backdrop-blur-xl overflow-hidden ${
+        className={`relative w-72 p-4 md:p-6 rounded-3xl border border-white/20 backdrop-blur-xl overflow-hidden ${
           isActive ? "bg-white/15" : "bg-white/8"
         }`}
         style={{
@@ -288,6 +288,15 @@ export function NeuralCases() {
   const isInView = useInView(containerRef, { once: true, margin: "-20%" })
   const performance = usePerformance()
   
+  // Handlers para swipe gestures em mobile
+  const handleSwipe = (direction: 'left' | 'right') => {
+    if (direction === 'left') {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
+    } else {
+      setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    }
+  }
+  
   // Ajusta complexidade baseado na performance
   const complexity = useMemo(() => {
     if (performance.prefersReducedMotion) return { lines: 0, particles: 0 }
@@ -315,7 +324,7 @@ export function NeuralCases() {
   const currentTestimonial = testimonials[activeTestimonial]
 
   return (
-    <section ref={containerRef} className="relative w-full py-32 overflow-hidden">
+    <section ref={containerRef} className="relative w-full py-16 md:py-32 overflow-hidden bg-black">
       {/* Quantum Field Background */}
       <motion.div className="absolute inset-0 opacity-40" style={{ y: backgroundY, scale: backgroundScale }}>
         {/* Neural Network - reduzido baseado em performance */}
@@ -358,7 +367,7 @@ export function NeuralCases() {
         {/* Simplified Reactive Quantum Field - apenas em dispositivos capazes */}
         {!performance.isLowEnd && (
           <motion.div
-            className="absolute w-[600px] h-[600px] rounded-full blur-3xl"
+            className="absolute w-[120vw] h-[120vw] md:w-[600px] md:h-[600px] rounded-full blur-2xl md:blur-3xl"
             style={{
               background: `radial-gradient(circle, ${currentTestimonial.glowColor} 0%, transparent 70%)`,
               left: "50%",
@@ -426,13 +435,13 @@ export function NeuralCases() {
       <div className="container px-4 md:px-6 relative z-10">
         {/* Quantum Header */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.div
-            className="inline-flex items-center rounded-full px-8 py-4 text-sm font-medium mb-8 border border-white/20 text-white backdrop-blur-xl shadow-lg relative overflow-hidden"
+            className="inline-flex items-center rounded-full px-4 py-2 md:px-8 md:py-4 text-xs md:text-sm font-medium mb-6 md:mb-8 border border-white/20 text-white backdrop-blur-xl shadow-lg relative overflow-hidden"
             style={{
               background: `linear-gradient(135deg, ${currentTestimonial.color.split(" ")[1]}, ${currentTestimonial.color.split(" ")[3]})`,
               backdropFilter: "blur(20px) saturate(180%)",
@@ -469,7 +478,7 @@ export function NeuralCases() {
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 text-white relative"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 md:mb-8 text-white relative px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -496,30 +505,137 @@ export function NeuralCases() {
           </motion.h2>
 
           <motion.p
-            className="max-w-3xl text-gray-300 md:text-xl mx-auto leading-relaxed"
+            className="max-w-sm sm:max-w-lg md:max-w-3xl text-sm sm:text-base md:text-xl mx-auto leading-relaxed text-gray-300 px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             Vozes de líderes que transcenderam os limites do possível e criaram novas realidades empresariais.
           </motion.p>
+          
+          {/* Hint de swipe para mobile */}
+          <motion.div
+            className="lg:hidden flex items-center justify-center gap-2 mt-6 text-xs text-gray-500"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ duration: 2, repeat: 3, delay: 1 }}
+          >
+            <motion.span
+              animate={{ x: [-5, 5, -5] }}
+              transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+            >
+              ←
+            </motion.span>
+            Deslize para navegar
+            <motion.span
+              animate={{ x: [-5, 5, -5] }}
+              transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+            >
+              →
+            </motion.span>
+          </motion.div>
         </motion.div>
 
         {/* Interactive Neural Field */}
-        <div className="relative h-[700px] mb-20">
-          {/* Floating Testimonials - Mostrar múltiplos cards */}
-          {testimonials.map((testimonial, index) => (
-            <FloatingTestimonial
-              key={testimonial.id}
-              testimonial={testimonial}
-              index={index}
-              isActive={activeTestimonial === index}
-              onActivate={() => setActiveTestimonial(index)}
-            />
-          ))}
+        <div className="relative min-h-[400px] lg:h-[700px] mb-12 md:mb-20">
+          {/* Mobile: Lista vertical de testimonials */}
+          <div className="flex flex-col gap-6 lg:hidden px-4">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.id}
+                className="cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => setActiveTestimonial(index)}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = Math.abs(offset.x) * velocity.x
+                  if (swipe > 1000) {
+                    handleSwipe('left')
+                  } else if (swipe < -1000) {
+                    handleSwipe('right')
+                  }
+                }}
+              >
+                <motion.div
+                  className={`relative p-4 md:p-6 rounded-3xl border border-white/20 backdrop-blur-xl overflow-hidden ${
+                    activeTestimonial === index ? "bg-white/15" : "bg-white/8"
+                  }`}
+                  style={{
+                    background: `linear-gradient(135deg, ${testimonial.color.split(" ")[1]}, ${testimonial.color.split(" ")[3]})`,
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {/* Glow effect ativo */}
+                  {activeTestimonial === index && (
+                    <motion.div
+                      className="absolute -inset-1 rounded-3xl blur-lg md:blur-xl"
+                      style={{ background: testimonial.glowColor }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.6 }}
+                      exit={{ opacity: 0 }}
+                    />
+                  )}
 
-          {/* Neural Connections */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                  <div className="relative">
+                    {/* Rating stars */}
+                    <div className="flex gap-1 mb-4">
+                      {Array.from({ length: testimonial.rating }).map((_, i) => (
+                        <Star key={i} className="size-4 fill-neon-green text-neon-green" />
+                      ))}
+                    </div>
+
+                    {/* Quote */}
+                    <blockquote className="text-sm text-gray-200 mb-4 leading-relaxed italic">
+                      "{testimonial.quote}"
+                    </blockquote>
+
+                    {/* Author */}
+                    <div className="flex items-center gap-3">
+                      <div className="size-10 rounded-full bg-white/10 flex items-center justify-center text-white font-medium text-sm backdrop-blur-sm">
+                        {testimonial.author.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-white">{testimonial.author}</p>
+                        <p className="text-xs text-white/70">{testimonial.role}</p>
+                        <p className="text-xs text-white/50">{testimonial.company}</p>
+                      </div>
+                    </div>
+
+                    {/* Metrics */}
+                    <div className="mt-4 flex gap-4 text-xs">
+                      {Object.entries(testimonial.metrics).map(([key, value]) => (
+                        <div key={key} className="flex flex-col">
+                          <span className="text-white font-bold">{value}</span>
+                          <span className="text-gray-400 capitalize">{key}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Desktop: Floating testimonials */}
+          <div className="hidden lg:block">
+            {testimonials.map((testimonial, index) => (
+              <FloatingTestimonial
+                key={testimonial.id}
+                testimonial={testimonial}
+                index={index}
+                isActive={activeTestimonial === index}
+                onActivate={() => setActiveTestimonial(index)}
+              />
+            ))}
+          </div>
+
+          {/* Neural Connections - Desktop only */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block">
             {testimonials.map((testimonial, i) => {
               const nextIndex = (i + 1) % testimonials.length
               const next = testimonials[nextIndex]

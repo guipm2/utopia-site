@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useMemo } from "react"
 import { ArrowRight, Sparkles, Zap, Brain, Infinity, Play, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -10,6 +10,27 @@ export function QuantumCTA() {
   const [currentPhase, setCurrentPhase] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-20%" })
+
+  // Detectar mobile para otimizar animações
+  const [isMobile, setIsMobile] = useState(false)
+  
+  // Gerar posições da constellation uma única vez
+  const constellationPoints = useMemo(() => 
+    Array.from({ length: 8 }).map(() => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      duration: 3 + Math.random() * 4,
+      delay: Math.random() * 3,
+    })),
+    []
+  )
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -48,14 +69,14 @@ export function QuantumCTA() {
   }, [])
 
   return (
-    <section ref={containerRef} className="w-full py-32 relative overflow-hidden">
+    <section ref={containerRef} className="w-full py-16 md:py-32 relative overflow-hidden">
       {/* Quantum Field Background */}
-      <motion.div className="absolute inset-0" style={{ y: backgroundY, scale: backgroundScale }}>
-        {/* Dimensional Rifts */}
+      <motion.div className="absolute inset-0" style={{ y: isMobile ? 0 : backgroundY, scale: isMobile ? 1 : backgroundScale }}>
+        {/* Dimensional Rifts - reduzidos em mobile */}
         <div className="absolute inset-0">
-          {Array.from({ length: 3 }).map((_, i) => (
+          {Array.from({ length: isMobile ? 2 : 3 }).map((_, i) => (
             <motion.div
-              key={i}
+              key={`rift-${i}`}
               className="absolute w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
               style={{
                 top: `${20 + i * 15}%`,
@@ -77,7 +98,7 @@ export function QuantumCTA() {
 
         {/* Reactive Quantum Field */}
         <motion.div
-          className="absolute w-[1000px] h-[1000px] rounded-full blur-3xl"
+          className="absolute w-[150vw] h-[150vw] md:w-[1000px] md:h-[1000px] rounded-full blur-2xl md:blur-3xl"
           style={{
             background: `conic-gradient(from 0deg, 
               rgba(0, 255, 65, 0.3) 0deg,
@@ -96,19 +117,19 @@ export function QuantumCTA() {
           }}
           transition={{
             rotate: { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-            scale: { duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
-            opacity: { duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
+            scale: { duration: isMobile ? 6 : 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
+            opacity: { duration: isMobile ? 4 : 3, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" },
           }}
         />
 
         {/* Neural Constellation */}
-        {Array.from({ length: 8 }).map((_, i) => (
+        {constellationPoints.map((point, i) => (
           <motion.div
-            key={i}
+            key={`constellation-${i}`}
             className="absolute w-2 h-2 bg-white/20 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${point.left}%`,
+              top: `${point.top}%`,
             }}
             animate={{
               scale: [1, 2, 1],
@@ -116,10 +137,10 @@ export function QuantumCTA() {
               rotate: [0, 360],
             }}
             transition={{
-              duration: 3 + Math.random() * 4,
+              duration: point.duration,
               repeat: Number.POSITIVE_INFINITY,
               ease: "easeInOut",
-              delay: Math.random() * 3,
+              delay: point.delay,
             }}
           />
         ))}
@@ -154,7 +175,7 @@ export function QuantumCTA() {
         >
           {/* Dynamic Phase Header */}
           <motion.div
-            key={currentPhase}
+            key={`phase-header-${currentPhase}`}
             initial={{ opacity: 0, y: 30, rotateX: -90 }}
             animate={{ opacity: 1, y: 0, rotateX: 0 }}
             exit={{ opacity: 0, y: -30, rotateX: 90 }}
@@ -175,11 +196,11 @@ export function QuantumCTA() {
 
           {/* Quantum Title */}
           <motion.h2
-            key={currentPhase}
+            key={`quantum-title-${currentPhase}`}
             initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
             animate={{ opacity: 1, scale: 1, rotateY: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-            className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight mb-12 text-white relative"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight mb-8 md:mb-12 text-white relative px-4"
             style={{ perspective: "1000px" }}
           >
             {phases[currentPhase].text}
@@ -199,7 +220,7 @@ export function QuantumCTA() {
 
           {/* Quantum Description */}
           <motion.p
-            className="text-xl md:text-2xl text-gray-300 mb-16 max-w-4xl mx-auto leading-relaxed"
+            className="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-300 mb-12 md:mb-16 max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto leading-relaxed px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -220,7 +241,7 @@ export function QuantumCTA() {
 
           {/* Quantum Action Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-8 justify-center mb-20"
+            className="flex flex-col sm:flex-row gap-4 md:gap-8 justify-center mb-12 md:mb-20 px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.8 }}
@@ -241,7 +262,7 @@ export function QuantumCTA() {
 
               <Button
                 size="lg"
-                className="relative rounded-full h-20 px-16 text-lg group bg-neon-green text-black hover:bg-neon-green-light font-bold border-0 shadow-[0_0_40px_rgba(0,255,65,0.6)] transition-all duration-500 overflow-hidden"
+                className="relative rounded-full h-14 md:h-20 px-10 md:px-16 text-base md:text-lg group bg-neon-green text-black hover:bg-neon-green-light font-bold border-0 shadow-[0_0_40px_rgba(0,255,65,0.6)] transition-all duration-500 overflow-hidden w-full sm:w-auto"
               >
                 {/* Quantum Energy */}
                 <motion.div
@@ -290,7 +311,7 @@ export function QuantumCTA() {
               <Button
                 size="lg"
                 variant="ghost"
-                className="relative rounded-full h-20 px-16 text-lg text-white hover:text-white transition-all duration-500 border-2 border-white/30 hover:border-white/60 bg-white/5 hover:bg-white/15 backdrop-blur-xl overflow-hidden group"
+                className="relative rounded-full h-14 md:h-20 px-10 md:px-16 text-base md:text-lg text-white hover:text-white transition-all duration-500 border-2 border-white/30 hover:border-white/60 bg-white/5 hover:bg-white/15 backdrop-blur-xl overflow-hidden group w-full sm:w-auto"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent"
@@ -318,7 +339,7 @@ export function QuantumCTA() {
 
           {/* Quantum Metrics */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 1.0 }}
@@ -348,7 +369,7 @@ export function QuantumCTA() {
             ].map((item, i) => (
               <motion.div
                 key={item.label}
-                className="relative p-8 rounded-2xl border border-white/10 backdrop-blur-xl overflow-hidden group cursor-pointer"
+                className="relative p-4 md:p-8 rounded-2xl border border-white/10 backdrop-blur-xl overflow-hidden group cursor-pointer"
                 style={{
                   background: `linear-gradient(135deg, ${item.color.split(" ")[1]}, ${item.color.split(" ")[3]})`,
                 }}

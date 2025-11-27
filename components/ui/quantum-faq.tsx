@@ -125,7 +125,7 @@ function QuantumFAQItem({ faq, index, isOpen, onToggle }: QuantumFAQItemProps) {
       <div className="relative z-10">
         {/* Question Header */}
         <motion.button
-          className="w-full p-8 text-left flex items-center justify-between group"
+          className="w-full p-4 md:p-8 text-left flex items-center justify-between group"
           onClick={onToggle}
           whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}
         >
@@ -138,7 +138,7 @@ function QuantumFAQItem({ faq, index, isOpen, onToggle }: QuantumFAQItemProps) {
               <div className="text-white">{faq.icon}</div>
             </motion.div>
 
-            <h3 className="text-lg font-medium text-white group-hover:text-white/90 transition-colors">
+            <h3 className="text-base md:text-lg font-medium text-white group-hover:text-white/90 transition-colors">
               {faq.question}
             </h3>
           </div>
@@ -200,7 +200,7 @@ export function QuantumFAQ() {
   }
 
   return (
-    <section ref={containerRef} className="w-full py-32 bg-black relative">
+    <section ref={containerRef} className="w-full py-16 md:py-32 bg-black relative">
       {/* Quantum Field Background */}
       <div className="absolute inset-0 opacity-30">
         {/* Neural Network */}
@@ -326,7 +326,7 @@ export function QuantumFAQ() {
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 text-white relative"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 text-white relative px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -353,7 +353,7 @@ export function QuantumFAQ() {
           </motion.h2>
 
           <motion.p
-            className="max-w-3xl text-gray-300 md:text-xl mx-auto leading-relaxed"
+            className="max-w-sm sm:max-w-lg md:max-w-3xl text-sm sm:text-base md:text-xl mx-auto leading-relaxed text-gray-300 px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.6 }}

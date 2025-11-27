@@ -110,7 +110,7 @@ function FloatingCard({ solution, index, isActive, onActivate }: FloatingCardPro
     >
       {/* Glow effect */}
       <motion.div
-        className="absolute -inset-4 rounded-2xl blur-xl"
+        className="absolute -inset-4 rounded-2xl blur-lg md:blur-xl"
         style={{ background: solution.glowColor }}
         animate={{
           opacity: isActive || isHovered ? 0.6 : 0.2,
@@ -121,7 +121,7 @@ function FloatingCard({ solution, index, isActive, onActivate }: FloatingCardPro
 
       {/* Card */}
       <motion.div
-        className={`relative w-64 p-6 rounded-2xl border border-white/20 backdrop-blur-xl overflow-hidden ${
+        className={`relative w-64 p-4 md:p-6 rounded-2xl border border-white/20 backdrop-blur-xl overflow-hidden ${
           isActive ? "bg-white/10" : "bg-white/5"
         }`}
         style={{
@@ -148,8 +148,8 @@ function FloatingCard({ solution, index, isActive, onActivate }: FloatingCardPro
         </motion.div>
 
         {/* Content */}
-        <h3 className="text-lg font-bold text-white mb-2">{solution.title}</h3>
-        <p className="text-sm text-white/80 mb-4">{solution.subtitle}</p>
+        <h3 className="text-base md:text-lg font-bold text-white mb-2">{solution.title}</h3>
+        <p className="text-xs md:text-sm text-white/80 mb-4">{solution.subtitle}</p>
 
         {/* Stats */}
         <div className="flex gap-2 text-xs">
@@ -182,6 +182,15 @@ export function ProfessionalSolutions() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-20%" })
 
+  // Handlers para swipe gestures em mobile
+  const handleSwipe = (direction: 'left' | 'right') => {
+    if (direction === 'left') {
+      setActiveSolution((prev) => (prev + 1) % solutions.length)
+    } else {
+      setActiveSolution((prev) => (prev - 1 + solutions.length) % solutions.length)
+    }
+  }
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -189,6 +198,16 @@ export function ProfessionalSolutions() {
 
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
   const backgroundScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 1.2])
+
+  // Detectar mobile para desabilitar parallax
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -220,7 +239,7 @@ export function ProfessionalSolutions() {
   const currentSolution = solutions[activeSolution]
 
   return (
-    <section ref={containerRef} className="relative w-full py-32 overflow-hidden bg-black">
+    <section ref={containerRef} className="relative w-full py-16 md:py-32 overflow-hidden bg-black">
       {/* Background Image with Reactive Glow */}
       <motion.div className="absolute inset-0 opacity-30" style={{ y: backgroundY, scale: backgroundScale }}>
         {/* Tech pattern background */}
@@ -240,8 +259,8 @@ export function ProfessionalSolutions() {
           className="absolute w-96 h-96 rounded-full blur-3xl"
           style={{
             background: `radial-gradient(circle, ${currentSolution.glowColor} 0%, transparent 70%)`,
-            left: `${mousePosition.x * 100}%`,
-            top: `${mousePosition.y * 100}%`,
+            left: isMobile ? '50%' : `${mousePosition.x * 100}%`,
+            top: isMobile ? '50%' : `${mousePosition.y * 100}%`,
             transform: "translate(-50%, -50%)",
           }}
           animate={{
@@ -259,7 +278,7 @@ export function ProfessionalSolutions() {
         {solutions.map((solution, i) => (
           <motion.div
             key={solution.id}
-            className="absolute w-32 h-32 rounded-full blur-2xl"
+            className="absolute w-32 h-32 rounded-full blur-xl md:blur-2xl"
             style={{
               background: `radial-gradient(circle, ${solution.glowColor} 0%, transparent 70%)`,
               left: solution.position.x,
@@ -301,13 +320,13 @@ export function ProfessionalSolutions() {
       <div className="container px-4 md:px-6 relative z-10">
         {/* Header */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.div
-            className="inline-flex items-center rounded-full px-8 py-4 text-sm font-medium mb-8 border border-white/20 text-white backdrop-blur-xl shadow-lg"
+            className="inline-flex items-center rounded-full px-4 py-2 md:px-8 md:py-4 text-xs md:text-sm font-medium mb-6 md:mb-8 border border-white/20 text-white backdrop-blur-xl shadow-lg"
             style={{
               background: `linear-gradient(135deg, ${currentSolution.color.split(" ")[1]}, ${currentSolution.color.split(" ")[3]})`,
               backdropFilter: "blur(20px) saturate(180%)",
@@ -324,7 +343,7 @@ export function ProfessionalSolutions() {
           </motion.div>
 
           <motion.h2
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 text-white"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 md:mb-8 text-white px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -340,7 +359,7 @@ export function ProfessionalSolutions() {
           </motion.h2>
 
           <motion.p
-            className="max-w-3xl text-gray-300 md:text-xl mx-auto leading-relaxed"
+            className="max-w-sm sm:max-w-lg md:max-w-3xl text-sm sm:text-base md:text-xl mx-auto leading-relaxed text-gray-300 px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -350,20 +369,93 @@ export function ProfessionalSolutions() {
         </motion.div>
 
         {/* Interactive Area */}
-        <div className="relative h-[600px] mb-20">
+        <div className="relative min-h-[400px] lg:h-[600px] mb-12 md:mb-20">
           {/* Floating Cards */}
-          {solutions.map((solution, index) => (
-            <FloatingCard
-              key={solution.id}
-              solution={solution}
-              index={index}
-              isActive={activeSolution === index}
-              onActivate={() => setActiveSolution(index)}
-            />
-          ))}
+          <div className="flex flex-col gap-6 lg:hidden px-4">
+            {solutions.map((solution, index) => (
+              <motion.div
+                key={solution.id}
+                className="cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => setActiveSolution(index)}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = Math.abs(offset.x) * velocity.x
+                  if (swipe > 1000) {
+                    handleSwipe('left')
+                  } else if (swipe < -1000) {
+                    handleSwipe('right')
+                  }
+                }}
+              >
+                <motion.div
+                  className={`relative p-4 md:p-6 rounded-2xl border border-white/20 backdrop-blur-xl overflow-hidden ${
+                    activeSolution === index ? "bg-white/10" : "bg-white/5"
+                  }`}
+                  style={{
+                    background: `linear-gradient(135deg, ${solution.color.split(" ")[1]}, ${solution.color.split(" ")[3]})`,
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {/* Glow effect */}
+                  {activeSolution === index && (
+                    <motion.div
+                      className="absolute -inset-1 rounded-2xl blur-xl"
+                      style={{ background: solution.glowColor }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.6 }}
+                      exit={{ opacity: 0 }}
+                    />
+                  )}
 
-          {/* Connection Lines */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                  <div className="relative">
+                    {/* Icon */}
+                    <div className="mb-4 p-3 rounded-xl bg-white/10 w-fit">
+                      <div className="text-white">{solution.icon}</div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold text-white mb-2">{solution.title}</h3>
+                      <p className="text-sm text-gray-300 mb-4">{solution.subtitle}</p>
+                      <p className="text-sm text-gray-400 leading-relaxed">{solution.description}</p>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="flex gap-4 text-xs">
+                      {Object.entries(solution.stats).map(([key, value]) => (
+                        <div key={key} className="flex flex-col">
+                          <span className="text-white font-bold">{value}</span>
+                          <span className="text-gray-400 capitalize">{key}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Desktop Floating Cards */}
+          <div className="hidden lg:block">
+            {solutions.map((solution, index) => (
+              <FloatingCard
+                key={solution.id}
+                solution={solution}
+                index={index}
+                isActive={activeSolution === index}
+                onActivate={() => setActiveSolution(index)}
+              />
+            ))}
+          </div>
+
+          {/* Connection Lines - Desktop only */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block">
             {solutions.map((solution, i) => {
               const nextIndex = (i + 1) % solutions.length
               const next = solutions[nextIndex]

@@ -4,9 +4,8 @@ import { useState, useEffect } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { motion, useScroll, useSpring } from "framer-motion"
-import { ChevronRight, Menu, X, Moon, Sun } from "lucide-react"
+import { ChevronRight, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "next-themes"
 import { usePerformance } from "@/hooks/use-performance"
 
 // Critical components - load immediately
@@ -69,8 +68,6 @@ const QuantumCTA = dynamic(
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
   const { scrollYProgress } = useScroll()
   const performance = usePerformance()
 
@@ -78,7 +75,6 @@ export default function LandingPage() {
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 })
 
   useEffect(() => {
-    setMounted(true)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
     }
@@ -86,10 +82,6 @@ export default function LandingPage() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
 
   return (
     <>
@@ -101,30 +93,31 @@ export default function LandingPage() {
       {!performance.isLowEnd && !performance.prefersReducedMotion && <FloatingElements />}
 
       <div className="flex min-h-[100dvh] flex-col bg-black text-white relative">
-        <motion.header
-          initial={{
-            y: -120,
-            opacity: 0,
-            scale: 0.8,
-            filter: "blur(10px)",
-          }}
-          animate={{
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            filter: "blur(0px)",
-          }}
-          transition={{
-            duration: 0.8,
-            delay: 1.2,
-            ease: [0.25, 0.1, 0.25, 1],
-            opacity: { duration: 0.6, delay: 1.2 },
-            scale: { duration: 0.6, delay: 1.3 },
-            filter: { duration: 0.5, delay: 1.4 },
-          }}
-          className="fixed top-6 left-0 right-0 z-40 flex justify-center px-4"
-        >
-          <motion.div
+        <div className="fixed top-6 left-0 right-0 z-40 flex justify-center px-4">
+          <motion.header
+            initial={{
+              y: -120,
+              opacity: 0,
+              scale: 0.8,
+              filter: "blur(10px)",
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              filter: "blur(0px)",
+            }}
+            transition={{
+              duration: 0.8,
+              delay: 1.2,
+              ease: [0.25, 0.1, 0.25, 1],
+              opacity: { duration: 0.6, delay: 1.2 },
+              scale: { duration: 0.6, delay: 1.3 },
+              filter: { duration: 0.5, delay: 1.4 },
+            }}
+            className="w-full max-w-[calc(100vw-2rem)] md:max-w-4xl"
+          >
+            <motion.div
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{
@@ -176,16 +169,16 @@ export default function LandingPage() {
               }}
             />
 
-            <div className="relative flex h-16 items-center justify-between px-8 min-w-[600px] max-w-4xl">
+            <div className="relative flex h-14 md:h-16 items-center justify-center md:justify-between px-2 md:px-8 gap-3 md:gap-4 safe-left safe-right safe-top w-full">
               <motion.div
-                className="flex items-center gap-3 font-bold text-lg"
+                className="flex items-center gap-1.5 md:gap-3 font-bold text-sm md:text-lg flex-shrink-0"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 5.0 }}
                 whileHover={{ scale: 1.05 }}
               >
                 <motion.div
-                  className="size-8 rounded-full bg-neon-green flex items-center justify-center text-black font-bold text-sm shadow-[0_0_15px_rgba(0,255,65,0.6)]"
+                  className="size-5 md:size-8 rounded-full bg-neon-green flex items-center justify-center text-black font-bold text-[10px] md:text-sm shadow-[0_0_15px_rgba(0,255,65,0.6)]"
                   initial={{ rotate: -180, scale: 0 }}
                   animate={{ rotate: 0, scale: 1 }}
                   transition={{ duration: 0.8, delay: 5.2, type: "spring", stiffness: 200 }}
@@ -233,23 +226,6 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, delay: 5.6 }}
               >
                 <motion.div
-                  initial={{ scale: 0, rotate: 180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.6, delay: 5.8, type: "spring" }}
-                  whileHover={{ scale: 1.1, rotate: 180 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={toggleTheme}
-                    className="rounded-full text-neon-green hover:bg-neon-green/10 hover:shadow-[0_0_15px_rgba(0,255,65,0.3)] size-9 backdrop-blur-sm"
-                  >
-                    {mounted && theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
-                  </Button>
-                </motion.div>
-
-                <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.6, delay: 6.0, type: "spring" }}
@@ -267,24 +243,7 @@ export default function LandingPage() {
               </motion.div>
 
               {/* Mobile menu button */}
-              <div className="flex items-center gap-3 md:hidden">
-                <motion.div
-                  initial={{ scale: 0, rotate: 180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.6, delay: 5.8, type: "spring" }}
-                  whileHover={{ scale: 1.1, rotate: 180 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={toggleTheme}
-                    className="rounded-full text-neon-green size-9 hover:bg-neon-green/10"
-                  >
-                    {mounted && theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
-                  </Button>
-                </motion.div>
-
+              <div className="flex items-center md:hidden flex-shrink-0 absolute right-2 md:relative md:right-auto">
                 <motion.div
                   initial={{ scale: 0, rotate: 180 }}
                   animate={{ scale: 1, rotate: 0 }}
@@ -296,7 +255,7 @@ export default function LandingPage() {
                     variant="ghost"
                     size="icon"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="text-neon-green size-9 hover:bg-neon-green/10 rounded-full"
+                    className="text-neon-green size-8 hover:bg-neon-green/10 rounded-full flex-shrink-0"
                   >
                     {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
                   </Button>
@@ -310,7 +269,7 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                className="md:hidden absolute top-full left-0 right-0 mt-2 rounded-2xl overflow-hidden border border-neon-green/40 shadow-[0_0_30px_rgba(0,255,65,0.2)]"
+                className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 rounded-2xl overflow-hidden border border-neon-green/40 shadow-[0_0_30px_rgba(0,255,65,0.2)]"
                 style={{
                   background: "rgba(0,0,0,0.8)",
                   backdropFilter: "blur(60px) saturate(200%)",
@@ -360,6 +319,7 @@ export default function LandingPage() {
             )}
           </motion.div>
         </motion.header>
+        </div>
 
         <main className="flex-1 relative">
           {/* Futuristic Hero Section */}
@@ -384,7 +344,7 @@ export default function LandingPage() {
           </ParallaxSection>
         </main>
 
-        <footer className="w-full border-t border-white/10 relative">
+        <footer className="w-full border-t border-white/10 relative safe-bottom">
           {/* Quantum Glass background */}
           <div
             className="absolute inset-0"
