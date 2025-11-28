@@ -206,7 +206,7 @@ export function FuturisticHero() {
             <motion.div
               initial={{ opacity: 0, y: 30, scale: 0.8 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 1.2, delay: 6.4, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 1.2, delay: 1.0, ease: [0.25, 0.1, 0.25, 1] }}
               className="mb-12"
             >
               <motion.div
@@ -290,7 +290,7 @@ export function FuturisticHero() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 8.4, ease: [0.25, 0.1, 0.25, 1] }}
+              transition={{ duration: 1.2, delay: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
               className="mb-12 md:mb-16 px-4"
             >
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto leading-relaxed relative">
@@ -325,7 +325,7 @@ export function FuturisticHero() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 9.2, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1.2, delay: 2.0, ease: [0.25, 0.1, 0.25, 1] }}
             className="flex flex-col sm:flex-row gap-4 md:gap-8 justify-center mb-12 md:mb-20"
           >
             {/* Primary Quantum Button */}
@@ -413,7 +413,7 @@ export function FuturisticHero() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 10.0 }}
+            transition={{ duration: 1.2, delay: 2.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-12 text-xs md:text-sm text-gray-400"
           >
             {[
@@ -425,7 +425,7 @@ export function FuturisticHero() {
                 key={item.text}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 10.4 + item.delay }}
+                transition={{ duration: 0.8, delay: 2.9 + item.delay }}
                 className="flex items-center gap-3 group cursor-pointer"
                 whileHover={{ scale: 1.05, x: 5 }}
               >

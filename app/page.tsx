@@ -109,11 +109,11 @@ export default function LandingPage() {
             }}
             transition={{
               duration: 0.8,
-              delay: 1.2,
+              delay: 0.2,
               ease: [0.25, 0.1, 0.25, 1],
-              opacity: { duration: 0.6, delay: 1.2 },
-              scale: { duration: 0.6, delay: 1.3 },
-              filter: { duration: 0.5, delay: 1.4 },
+              opacity: { duration: 0.6, delay: 0.2 },
+              scale: { duration: 0.6, delay: 0.3 },
+              filter: { duration: 0.5, delay: 0.4 },
             }}
             className="w-full max-w-[calc(100vw-2rem)] md:max-w-4xl"
           >
@@ -122,7 +122,7 @@ export default function LandingPage() {
             animate={{ scale: 1 }}
             transition={{
               duration: 0.5,
-              delay: 1.5,
+              delay: 0.5,
               ease: [0.25, 0.1, 0.25, 1],
             }}
             className={`relative backdrop-blur-3xl transition-all duration-700 rounded-full border ${
@@ -139,7 +139,7 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.6 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
               className={`absolute inset-0 rounded-full transition-all duration-700 ${
                 isScrolled
                   ? "bg-gradient-to-r from-neon-green/10 via-transparent to-neon-green/10"
@@ -159,7 +159,7 @@ export default function LandingPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.7 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
               className="absolute inset-[1px] rounded-full"
               style={{
                 background: `linear-gradient(145deg, 
@@ -174,14 +174,14 @@ export default function LandingPage() {
                 className="flex items-center gap-1.5 md:gap-3 font-bold text-sm md:text-lg flex-shrink-0"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 5.0 }}
+                transition={{ duration: 0.8, delay: 2.5 }}
                 whileHover={{ scale: 1.05 }}
               >
                 <motion.div
                   className="size-5 md:size-8 rounded-full bg-neon-green flex items-center justify-center text-black font-bold text-[10px] md:text-sm shadow-[0_0_15px_rgba(0,255,65,0.6)]"
                   initial={{ rotate: -180, scale: 0 }}
                   animate={{ rotate: 0, scale: 1 }}
-                  transition={{ duration: 0.8, delay: 5.2, type: "spring", stiffness: 200 }}
+                  transition={{ duration: 0.8, delay: 2.7, type: "spring", stiffness: 200 }}
                   whileHover={{ rotate: 360 }}
                 >
                   ∞
@@ -202,7 +202,7 @@ export default function LandingPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                       duration: 0.6,
-                      delay: 5.2 + i * 0.1,
+                      delay: 2.7 + i * 0.1,
                       ease: [0.25, 0.1, 0.25, 1],
                     }}
                   >
@@ -223,12 +223,12 @@ export default function LandingPage() {
                 className="hidden md:flex gap-3 items-center"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 5.6 }}
+                transition={{ duration: 0.8, delay: 3.1 }}
               >
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 6.0, type: "spring" }}
+                  transition={{ duration: 0.6, delay: 3.5, type: "spring" }}
                   className="relative group"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -247,7 +247,7 @@ export default function LandingPage() {
                 <motion.div
                   initial={{ scale: 0, rotate: 180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.6, delay: 6.0, type: "spring" }}
+                  transition={{ duration: 0.6, delay: 3.5, type: "spring" }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
