@@ -262,8 +262,10 @@ export function QuantumCTA() {
 
               <Button
                 size="lg"
+                asChild
                 className="relative rounded-full h-14 md:h-20 px-10 md:px-16 text-base md:text-lg group bg-neon-green text-black hover:bg-neon-green-light font-bold border-0 shadow-[0_0_40px_rgba(0,255,65,0.6)] transition-all duration-500 overflow-hidden w-full sm:w-auto"
               >
+                <a href="https://wa.me/5527981076715" target="_blank" rel="noopener noreferrer">
                 {/* Quantum Energy */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
@@ -286,6 +288,7 @@ export function QuantumCTA() {
                   Iniciar Transformação Quântica
                 </span>
                 <ArrowRight className="ml-3 size-6 transition-transform group-hover:translate-x-2 relative z-10" />
+                </a>
               </Button>
             </motion.div>
 
@@ -311,8 +314,10 @@ export function QuantumCTA() {
               <Button
                 size="lg"
                 variant="ghost"
+                asChild
                 className="relative rounded-full h-14 md:h-20 px-10 md:px-16 text-base md:text-lg text-white hover:text-white transition-all duration-500 border-2 border-white/30 hover:border-white/60 bg-white/5 hover:bg-white/15 backdrop-blur-xl overflow-hidden group w-full sm:w-auto"
               >
+                <a href="https://wa.me/5527981076715" target="_blank" rel="noopener noreferrer">
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent"
                   animate={{ x: ["-100%", "100%"] }}
@@ -333,6 +338,7 @@ export function QuantumCTA() {
                   </motion.div>
                   Explorar Demonstração Neural
                 </span>
+                </a>
               </Button>
             </motion.div>
           </motion.div>

@@ -545,10 +545,13 @@ export function ProfessionalSolutions() {
               <motion.div initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.6 }}>
                 <Button
                   size="lg"
+                  asChild
                   className="rounded-full bg-neon-green text-black hover:bg-neon-green-light font-medium px-8 group shadow-[0_0_20px_rgba(0,255,65,0.4)]"
                 >
-                  Explorar Solução
-                  <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+                  <a href="https://wa.me/5527981076715" target="_blank" rel="noopener noreferrer">
+                    Explorar Solução
+                    <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+                  </a>
                 </Button>
               </motion.div>
             </div>
