@@ -347,7 +347,7 @@ export function FuturisticHero() {
                 asChild
                 className="relative rounded-full h-12 md:h-16 px-8 md:px-12 text-sm md:text-base group bg-neon-green text-black hover:bg-neon-green-light font-medium border-0 shadow-[0_0_30px_rgba(0,255,65,0.5)] transition-all duration-300 overflow-hidden"
               >
-                <a href="https://wa.me/5527981076715" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5527981076715?text=Oi!%20Visitei%20o%20site%20de%20voc%C3%AAs%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer">
                 {/* Quantum ripple */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent"
@@ -394,7 +394,7 @@ export function FuturisticHero() {
                 asChild
                 className="relative rounded-full h-12 md:h-16 px-8 md:px-12 text-sm md:text-base text-neon-green hover:text-neon-green-light transition-all duration-300 border border-neon-green/40 hover:border-neon-green/70 bg-black/70 hover:bg-black/80 backdrop-blur-sm overflow-hidden group"
               >
-                <a href="https://wa.me/5527981076715" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5527981076715?text=Oi!%20Visitei%20o%20site%20de%20voc%C3%AAs%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer">
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-neon-green/10 to-transparent"
                   animate={{ x: ["-100%", "100%"] }}
