@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { useRef, useState, useEffect, useMemo } from "react"
 import { ArrowRight, Sparkles, Zap, Brain, Infinity, Play, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export function QuantumCTA() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -265,7 +266,7 @@ export function QuantumCTA() {
                 asChild
                 className="relative rounded-full h-14 md:h-20 px-10 md:px-16 text-base md:text-lg group bg-neon-green text-black hover:bg-neon-green-light font-bold border-0 shadow-[0_0_40px_rgba(0,255,65,0.6)] transition-all duration-500 overflow-hidden w-full sm:w-auto"
               >
-                <a href="https://wa.me/5527981076713?text=Oi!%20Visitei%20o%20site%20de%20voc%C3%AAs%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer">
+                <Link href="/quiz">
                 {/* Quantum Energy */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
@@ -288,7 +289,7 @@ export function QuantumCTA() {
                   Iniciar Transformação Quântica
                 </span>
                 <ArrowRight className="ml-3 size-6 transition-transform group-hover:translate-x-2 relative z-10" />
-                </a>
+                </Link>
               </Button>
             </motion.div>
 
@@ -317,7 +318,7 @@ export function QuantumCTA() {
                 asChild
                 className="relative rounded-full h-14 md:h-20 px-10 md:px-16 text-base md:text-lg text-white hover:text-white transition-all duration-500 border-2 border-white/30 hover:border-white/60 bg-white/5 hover:bg-white/15 backdrop-blur-xl overflow-hidden group w-full sm:w-auto"
               >
-                <a href="https://wa.me/5527981076713?text=Oi!%20Visitei%20o%20site%20de%20voc%C3%AAs%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer">
+                <Link href="/quiz">
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent"
                   animate={{ x: ["-100%", "100%"] }}
@@ -338,7 +339,7 @@ export function QuantumCTA() {
                   </motion.div>
                   Explorar Demonstração Neural
                 </span>
-                </a>
+                </Link>
               </Button>
             </motion.div>
           </motion.div>

@@ -235,11 +235,11 @@ export default function LandingPage() {
                 >
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-neon-green/30 via-neon-green/50 to-neon-green/30 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500 group-hover:duration-200"></div>
                   <Button asChild className="relative rounded-full bg-neon-green text-black hover:bg-neon-green-light group font-medium h-9 px-6 text-sm shadow-[0_0_20px_rgba(0,255,65,0.4)] backdrop-blur-sm border border-neon-green/30 transition-all duration-300 overflow-hidden">
-                    <a href="https://wa.me/5527981076713?text=Oi!%20Visitei%20o%20site%20de%20voc%C3%AAs%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer">
+                    <Link href="/quiz">
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
                       <span className="relative z-10">Explorar</span>
                       <ChevronRight className="ml-1 size-3 transition-transform group-hover:translate-x-1 relative z-10" />
-                    </a>
+                    </Link>
                   </Button>
                 </motion.div>
               </motion.div>
@@ -310,11 +310,11 @@ export default function LandingPage() {
                     <div className="relative group">
                       <div className="absolute -inset-0.5 bg-gradient-to-r from-neon-green/30 via-neon-green/50 to-neon-green/30 rounded-full blur opacity-0 group-hover:opacity-100 transition duration-500 group-hover:duration-200"></div>
                       <Button asChild className="relative w-full rounded-full bg-neon-green text-black hover:bg-neon-green-light mt-2 h-9 shadow-[0_0_20px_rgba(0,255,65,0.4)] transition-all duration-300 overflow-hidden group">
-                        <a href="https://wa.me/5527981076713?text=Oi!%20Visitei%20o%20site%20de%20voc%C3%AAs%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer">
+                        <Link href="/quiz">
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
                           <span className="relative z-10">Explorar</span>
                           <ChevronRight className="ml-1 size-3 relative z-10" />
-                        </a>
+                        </Link>
                       </Button>
                     </div>
                   </div>

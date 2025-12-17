@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import { Bot, Cpu, Network, Zap, Shield, ArrowRight, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 const solutions = [
   {
@@ -548,10 +549,10 @@ export function ProfessionalSolutions() {
                   asChild
                   className="rounded-full bg-neon-green text-black hover:bg-neon-green-light font-medium px-8 group shadow-[0_0_20px_rgba(0,255,65,0.4)]"
                 >
-                  <a href="https://wa.me/5527981076713?text=Oi!%20Visitei%20o%20site%20de%20voc%C3%AAs%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer">
+                  <Link href="/quiz">
                     Explorar Solução
                     <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
-                  </a>
+                  </Link>
                 </Button>
               </motion.div>
             </div>
