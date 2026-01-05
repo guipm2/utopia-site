@@ -183,13 +183,14 @@ export default function LandingPage() {
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.8, delay: 2.7, type: "spring", stiffness: 200 }}
                   whileHover={{ scale: 1.1 }}
+                  className="flex items-center"
                 >
                   <Image
-                    src="/icon.png"
+                    src="/icon-sem-fundo.png"
                     alt="Utopia Logo"
-                    width={120}
-                    height={40}
-                    className="h-8 md:h-10 w-auto"
+                    width={240}
+                    height={80}
+                    className="h-6 md:h-8 w-auto object-contain"
                     priority
                   />
                 </motion.div>
@@ -371,13 +372,14 @@ export default function LandingPage() {
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.5 }}
+                  className="flex items-center"
                 >
                   <Image
-                    src="/icon.png"
+                    src="/icon-sem-fundo.png"
                     alt="Utopia Logo"
-                    width={160}
-                    height={53}
-                    className="h-12 w-auto"
+                    width={320}
+                    height={107}
+                    className="h-10 md:h-12 w-auto object-contain"
                   />
                 </motion.div>
               </motion.div>

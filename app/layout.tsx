@@ -10,6 +10,16 @@ export const metadata: Metadata = {
   title: "Utopia - Transcendendo Realidades",
   description: "Uma landing page moderna e animada com Next.js 14, Tailwind CSS e componentes 3D interativos usando React Three Fiber.",
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/icon.jpeg' },
+      { url: '/icon-192.jpeg', sizes: '192x192', type: 'image/jpeg' },
+      { url: '/icon-512.jpeg', sizes: '512x512', type: 'image/jpeg' },
+    ],
+    apple: [
+      { url: '/icon-192.jpeg', sizes: '192x192', type: 'image/jpeg' },
+    ],
+  },
 }
 
 export const viewport: Viewport = {
