@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
+import Image from "next/image"
 import { motion, useScroll, useSpring } from "framer-motion"
 import { ChevronRight, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -178,15 +179,20 @@ export default function LandingPage() {
                 whileHover={{ scale: 1.05 }}
               >
                 <motion.div
-                  className="size-5 md:size-8 rounded-full bg-neon-green flex items-center justify-center text-black font-bold text-[10px] md:text-sm shadow-[0_0_15px_rgba(0,255,65,0.6)]"
-                  initial={{ rotate: -180, scale: 0 }}
-                  animate={{ rotate: 0, scale: 1 }}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
                   transition={{ duration: 0.8, delay: 2.7, type: "spring", stiffness: 200 }}
-                  whileHover={{ rotate: 360 }}
+                  whileHover={{ scale: 1.1 }}
                 >
-                  ∞
+                  <Image
+                    src="/icon.png"
+                    alt="Utopia Logo"
+                    width={120}
+                    height={40}
+                    className="h-8 md:h-10 w-auto"
+                    priority
+                  />
                 </motion.div>
-                <span className="text-neon-green drop-shadow-[0_0_10px_rgba(0,255,65,0.5)]">ut∞pia</span>
               </motion.div>
 
               <nav className="hidden md:flex gap-8">
@@ -363,17 +369,17 @@ export default function LandingPage() {
             <ScrollReveal>
               <motion.div className="flex items-center gap-3 font-bold text-2xl" whileHover={{ scale: 1.05 }}>
                 <motion.div
-                  className="size-12 rounded-full flex items-center justify-center text-black font-bold backdrop-blur-sm border border-white/20"
-                  style={{
-                    background: "linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85))",
-                    backdropFilter: "blur(10px)",
-                  }}
-                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  ∞
+                  <Image
+                    src="/icon.png"
+                    alt="Utopia Logo"
+                    width={160}
+                    height={53}
+                    className="h-12 w-auto"
+                  />
                 </motion.div>
-                <span className="text-white">ut∞pia</span>
               </motion.div>
               <p className="text-gray-400 mt-4 max-w-md leading-relaxed">
                 Transcendendo realidades através da consciência artificial. Criamos futuros que redefinem
