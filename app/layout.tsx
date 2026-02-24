@@ -3,12 +3,14 @@ import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import type { Metadata, Viewport } from "next"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Utopia - Transcendendo Realidades",
-  description: "Uma landing page moderna e animada com Next.js 14, Tailwind CSS e componentes 3D interativos usando React Three Fiber.",
+  title: "Utopia Solutions",
+  description: "Transcendemos os limites do possível. Criamos soluções que redefinem realidades. O futuro não é destino, é criação.",
   manifest: '/manifest.json',
   icons: {
     icon: [
@@ -48,6 +50,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

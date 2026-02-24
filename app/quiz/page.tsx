@@ -238,7 +238,7 @@ function TypingAnimation({ onStart }: { onStart: () => void }) {
       // Digitando
       timeout = setTimeout(() => {
         setDisplayText(fullText.slice(0, displayText.length + 1))
-      }, 50)
+      }, 40)
     } else if (!isDeleting && displayText.length === fullText.length) {
       // Texto completo - espera 3 segundos
       timeout = setTimeout(() => {
@@ -287,9 +287,8 @@ function TypingAnimation({ onStart }: { onStart: () => void }) {
         <h1 className="text-2xl md:text-4xl font-light text-white leading-relaxed">
           {displayText}
           <span
-            className={`inline-block w-[3px] h-[1em] bg-neon-green ml-1 align-middle transition-opacity duration-100 ${
-              showCursor ? "opacity-100" : "opacity-0"
-            }`}
+            className={`inline-block w-[3px] h-[1em] bg-neon-green ml-1 align-middle transition-opacity duration-100 ${showCursor ? "opacity-100" : "opacity-0"
+              }`}
           />
         </h1>
       </div>
@@ -478,13 +477,12 @@ function Quiz({ onComplete }: { onComplete: (data: Record<string, string>) => vo
           {sections.map((section, idx) => (
             <div key={section.name} className="flex items-center gap-2">
               <motion.div
-                className={`flex items-center justify-center size-8 rounded-full border-2 transition-all duration-300 ${
-                  idx < getCurrentSection()
-                    ? "bg-neon-green border-neon-green text-black"
-                    : idx === getCurrentSection()
+                className={`flex items-center justify-center size-8 rounded-full border-2 transition-all duration-300 ${idx < getCurrentSection()
+                  ? "bg-neon-green border-neon-green text-black"
+                  : idx === getCurrentSection()
                     ? "border-neon-green text-neon-green"
                     : "border-white/30 text-white/30"
-                }`}
+                  }`}
                 animate={{
                   scale: idx === getCurrentSection() ? 1.1 : 1,
                   boxShadow: idx === getCurrentSection() ? "0 0 20px rgba(0,255,65,0.4)" : "none",
@@ -493,17 +491,15 @@ function Quiz({ onComplete }: { onComplete: (data: Record<string, string>) => vo
                 {idx < getCurrentSection() ? <Check className="size-4" /> : idx + 1}
               </motion.div>
               <span
-                className={`hidden sm:block text-sm transition-colors duration-300 ${
-                  idx === getCurrentSection() ? "text-neon-green" : "text-white/50"
-                }`}
+                className={`hidden sm:block text-sm transition-colors duration-300 ${idx === getCurrentSection() ? "text-neon-green" : "text-white/50"
+                  }`}
               >
                 {section.name}
               </span>
               {idx < sections.length - 1 && (
                 <div
-                  className={`w-8 h-0.5 transition-colors duration-300 ${
-                    idx < getCurrentSection() ? "bg-neon-green" : "bg-white/20"
-                  }`}
+                  className={`w-8 h-0.5 transition-colors duration-300 ${idx < getCurrentSection() ? "bg-neon-green" : "bg-white/20"
+                    }`}
                 />
               )}
             </div>
@@ -515,13 +511,12 @@ function Quiz({ onComplete }: { onComplete: (data: Record<string, string>) => vo
           {questions.map((_, idx) => (
             <motion.div
               key={idx}
-              className={`rounded-full transition-all duration-300 ${
-                idx === currentIndex
-                  ? "w-8 h-2 bg-neon-green shadow-[0_0_10px_rgba(0,255,65,0.6)]"
-                  : idx < currentIndex
+              className={`rounded-full transition-all duration-300 ${idx === currentIndex
+                ? "w-8 h-2 bg-neon-green shadow-[0_0_10px_rgba(0,255,65,0.6)]"
+                : idx < currentIndex
                   ? "w-2 h-2 bg-neon-green/60"
                   : "w-2 h-2 bg-white/20"
-              }`}
+                }`}
               animate={{
                 scale: idx === currentIndex ? 1 : 0.9,
               }}
@@ -572,11 +567,10 @@ function Quiz({ onComplete }: { onComplete: (data: Record<string, string>) => vo
                       <button
                         key={option}
                         onClick={() => handleAnswer(option)}
-                        className={`w-full p-4 rounded-xl border text-left transition-all duration-300 ${
-                          answers[currentQuestion.id] === option
-                            ? "border-neon-green bg-neon-green/10 text-white"
-                            : "border-white/20 bg-white/5 text-white/80 hover:border-white/40 hover:bg-white/10"
-                        }`}
+                        className={`w-full p-4 rounded-xl border text-left transition-all duration-300 ${answers[currentQuestion.id] === option
+                          ? "border-neon-green bg-neon-green/10 text-white"
+                          : "border-white/20 bg-white/5 text-white/80 hover:border-white/40 hover:bg-white/10"
+                          }`}
                       >
                         {option}
                       </button>
@@ -598,15 +592,14 @@ function Quiz({ onComplete }: { onComplete: (data: Record<string, string>) => vo
                         value={answers[currentQuestion.id] || ""}
                         onChange={(e) => handleAnswer(e.target.value)}
                         placeholder={currentQuestion.placeholder}
-                        className={`w-full bg-transparent border-b-2 text-white text-xl md:text-2xl placeholder:text-white/30 outline-none transition-colors duration-300 py-4 text-center ${
-                          currentQuestion.id === "companyCNPJ"
-                            ? cnpjValidation.status === "valid"
-                              ? "border-neon-green"
-                              : cnpjValidation.status === "invalid"
+                        className={`w-full bg-transparent border-b-2 text-white text-xl md:text-2xl placeholder:text-white/30 outline-none transition-colors duration-300 py-4 text-center ${currentQuestion.id === "companyCNPJ"
+                          ? cnpjValidation.status === "valid"
+                            ? "border-neon-green"
+                            : cnpjValidation.status === "invalid"
                               ? "border-red-500"
                               : "border-white/30 focus:border-neon-green"
-                            : "border-white/30 focus:border-neon-green"
-                        }`}
+                          : "border-white/30 focus:border-neon-green"
+                          }`}
                         autoFocus
                       />
                       {/* Indicador de status do CNPJ */}
@@ -720,11 +713,10 @@ function Quiz({ onComplete }: { onComplete: (data: Record<string, string>) => vo
           variant="ghost"
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className={`rounded-full size-14 p-0 border transition-all duration-300 ${
-            currentIndex === 0
-              ? "border-white/10 text-white/20 cursor-not-allowed"
-              : "border-white/30 text-white hover:border-neon-green hover:text-neon-green hover:bg-neon-green/10"
-          }`}
+          className={`rounded-full size-14 p-0 border transition-all duration-300 ${currentIndex === 0
+            ? "border-white/10 text-white/20 cursor-not-allowed"
+            : "border-white/30 text-white hover:border-neon-green hover:text-neon-green hover:bg-neon-green/10"
+            }`}
         >
           <ArrowLeft className="size-6" />
         </Button>
@@ -732,11 +724,10 @@ function Quiz({ onComplete }: { onComplete: (data: Record<string, string>) => vo
         <Button
           onClick={handleNext}
           disabled={!canProceed()}
-          className={`rounded-full size-14 p-0 transition-all duration-300 ${
-            canProceed()
-              ? "bg-neon-green text-black hover:bg-neon-green-light shadow-[0_0_20px_rgba(0,255,65,0.4)]"
-              : "bg-white/10 text-white/30 cursor-not-allowed"
-          }`}
+          className={`rounded-full size-14 p-0 transition-all duration-300 ${canProceed()
+            ? "bg-neon-green text-black hover:bg-neon-green-light shadow-[0_0_20px_rgba(0,255,65,0.4)]"
+            : "bg-white/10 text-white/30 cursor-not-allowed"
+            }`}
         >
           {currentIndex === totalQuestions - 1 ? (
             <Check className="size-6" />
